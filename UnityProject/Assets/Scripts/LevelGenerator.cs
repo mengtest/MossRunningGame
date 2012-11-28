@@ -19,6 +19,7 @@ public class LevelGenerator
 	{
 		if(this.elapsed % 120 == 0)
 		{
+			Debug.Log( "make fence!");
 			this.factory.makeFence();
 		}
 		
@@ -36,16 +37,16 @@ internal class ObstacleFactory
 	public ObstacleFactory()
 	{
 		this.primordialFence = GameObject.Find("PrimordialFence");
-		FenceBehaviour fb = this.primordialFence.GetComponent("FenceBehaviour") as FenceBehaviour;
+		ObstacleBehaviour fb = this.primordialFence.GetComponent("ObstacleBehaviour") as ObstacleBehaviour;
 		fb.garbageCollectable = false;
 	}
 	
 	public GameObject makeFence( )
 	{
 		GameObject new_fence = (GameObject)GameObject.Instantiate( this.primordialFence );
-		new_fence.transform.position = new Vector3(30,0,0);		
+		new_fence.transform.position = new Vector3(30,1,0);		
 		
-		FenceBehaviour fb = new_fence.GetComponent("FenceBehaviour") as FenceBehaviour;
+		ObstacleBehaviour fb = new_fence.GetComponent("ObstacleBehaviour") as ObstacleBehaviour;
 		fb.speed = -0.15f;
 		fb.garbageCollectable = true;
 		return new_fence;

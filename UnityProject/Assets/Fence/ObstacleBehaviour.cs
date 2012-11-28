@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class FenceBehaviour : MonoBehaviour {
+public class ObstacleBehaviour : MonoBehaviour {
 	
 	public bool garbageCollectable = true;
 	public float speed = -0.15f;
