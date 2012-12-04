@@ -32,18 +32,18 @@ public class LevelGenerator
 
 internal class ObstacleFactory
 {
-	private GameObject primordialFence;
+	private GameObject primordialCrate;
 	
 	public ObstacleFactory()
 	{
-		this.primordialFence = GameObject.Find("PrimordialFence");
-		ObstacleBehaviour fb = this.primordialFence.GetComponent("ObstacleBehaviour") as ObstacleBehaviour;
+		this.primordialCrate = GameObject.Find("PrimordialCrate");
+		ObstacleBehaviour fb = this.primordialCrate.GetComponent("ObstacleBehaviour") as ObstacleBehaviour;
 		fb.garbageCollectable = false;
 	}
 	
 	public GameObject makeFence( )
 	{
-		GameObject new_fence = (GameObject)GameObject.Instantiate( this.primordialFence );
+		GameObject new_fence = (GameObject)GameObject.Instantiate( this.primordialCrate );
 		new_fence.transform.position = new Vector3(30,1,0);		
 		
 		ObstacleBehaviour fb = new_fence.GetComponent("ObstacleBehaviour") as ObstacleBehaviour;
