@@ -19,4 +19,9 @@ public class MainCharacter : MonoBehaviour
 		this.fsm.update();
 	}
 	
+	void OnCollisionEnter( Collision collision )
+	{
+	    Debug.Log ("collision!!!!!!!!!!");
+	}	
+	
 }

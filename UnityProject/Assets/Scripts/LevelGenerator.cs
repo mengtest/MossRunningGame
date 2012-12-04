@@ -49,6 +49,7 @@ internal class ObstacleFactory
 		ObstacleBehaviour fb = new_fence.GetComponent("ObstacleBehaviour") as ObstacleBehaviour;
 		fb.speed = -0.15f;
 		fb.garbageCollectable = true;
+		
 		return new_fence;
 	}
 }
