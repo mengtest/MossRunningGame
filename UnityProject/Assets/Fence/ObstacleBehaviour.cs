@@ -33,8 +33,12 @@ public class ObstacleBehaviour : MonoBehaviour {
 		}
 	}
 	
-	/*void OnCollisionEnter( Collision collision )
+	void OnCollisionEnter( Collision collision )
 	{
-	    Debug.Log ("collision!");
-	}*/		
+	    //Debug.Log ("collision!");
+		if(!this.gameObject.audio.isPlaying)
+		{
+			this.gameObject.audio.Play();
+		}
+	}		
 }

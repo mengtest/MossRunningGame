@@ -129,6 +129,7 @@ public class JumpingAnimation : CharAnimation
 	{
 		this.player.transform.localEulerAngles = new Vector3(275,90,90); // lean character forward a little bit
 		base.start();
+		this.player.audio.Play();
 	}
 	
 	public override void update ()
