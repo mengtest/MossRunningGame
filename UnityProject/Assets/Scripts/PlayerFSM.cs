@@ -92,7 +92,10 @@ internal class Running : PlayerState
 		
 		Vector3 pos = this.character.transform.localPosition;
 		pos.z = 0;
-		if(pos.x<-5) pos.x += 0.005f;
+		
+		float center = -5.0f;
+		if(pos.x<center) pos.x += 0.005f * (center - pos.x);
+		
 		this.character.transform.localPosition = pos;		
 		
 		//

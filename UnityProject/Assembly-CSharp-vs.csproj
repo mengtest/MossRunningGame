@@ -44,11 +44,12 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Fence\ObstacleBehaviour.cs" />
      <Compile Include="Assets\Scripts\Animations.cs" />
+     <Compile Include="Assets\Scripts\CoinBehaviour.cs" />
      <Compile Include="Assets\Scripts\Game.cs" />
      <Compile Include="Assets\Scripts\LevelGenerator.cs" />
      <Compile Include="Assets\Scripts\MainCharacter.cs" />
+     <Compile Include="Assets\Scripts\ObstacleBehaviour.cs" />
      <Compile Include="Assets\Scripts\PlayerFSM.cs" />
      <None Include="Assets\Standard Assets\Projectors\Blob-Shadow\ShadowProjection.shader" />
      <None Include="Assets\Shaders\PlainColor.shader" />
