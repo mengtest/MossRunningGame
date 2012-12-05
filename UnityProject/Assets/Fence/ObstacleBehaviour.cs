@@ -32,4 +32,9 @@ public class ObstacleBehaviour : MonoBehaviour {
 			this.speed = 0;
 		}
 	}
+	
+	/*void OnCollisionEnter( Collision collision )
+	{
+	    Debug.Log ("collision!");
+	}*/		
 }

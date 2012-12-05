@@ -89,6 +89,12 @@ internal class Running : PlayerState
 	{
 		//this.character.gameObject.transform.Rotate(Mathf.PI/8,Mathf.PI/8,Mathf.PI/8);
 		//this.setCharacterYPos(0);
+		
+		Vector3 pos = this.character.transform.localPosition;
+		pos.z = 0;
+		if(pos.x<-5) pos.x += 0.005f;
+		this.character.transform.localPosition = pos;		
+		
 		//
 		bool k = Input.anyKey;
 		if(k)

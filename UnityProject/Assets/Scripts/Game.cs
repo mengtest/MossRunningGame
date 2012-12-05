@@ -3,6 +3,7 @@ using System.Collections;
 
 public class Game : MonoBehaviour {
 	
+	private bool gameRunning;
 	private GameObject player;
 	
 	private LevelGenerator levelGenerator;
@@ -10,30 +11,30 @@ public class Game : MonoBehaviour {
 	// Use this for initialization
 	void Start ()
 	{
-		//this.player = GameObject.FindGameObjectWithTag("Player");
+		this.player = GameObject.FindGameObjectWithTag("Player");
 		
 		this.levelGenerator = new LevelGenerator();
+		
+		this.gameRunning = true;
 	}
 	
 	// Update is called once per frame
 	void Update ()
 	{
-		this.levelGenerator.update();
+		if(this.gameRunning)
+		{
+			this.levelGenerator.update();
+			this.checkGameOver();
+		}
+	}
+	
+	void checkGameOver ()
+	{
+		if(this.player.transform.localPosition.x<-15)
+		{
+			this.gameRunning = false;
+			Debug.Log ("Game Over");
+		}
 	}
 }
 
-
-
-
-public class GameRules
-{
-	
-	public GameRules()
-	{
-	}
-	
-	public void update()
-	{
-	}
-		
-}

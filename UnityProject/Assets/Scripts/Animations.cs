@@ -44,7 +44,6 @@ public class CharAnimation
 	{
 		Vector3 pos = this.player.transform.localPosition;
 		pos.y = y;
-		pos.z = 0;
 		this.player.transform.localPosition = pos;
 	}
 	
