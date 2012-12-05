@@ -44,6 +44,7 @@ public class CharAnimation
 	{
 		Vector3 pos = this.player.transform.localPosition;
 		pos.y = y;
+		pos.z = 0;
 		this.player.transform.localPosition = pos;
 	}
 	
@@ -77,7 +78,7 @@ public class RunningAnimation : CharAnimation
 	
 	public override void start()
 	{
-		this.player.transform.localEulerAngles = new Vector3(275,90,90);
+		this.player.transform.localEulerAngles = new Vector3(275,90,90); // lean character forward a little bit
 		
 		this.setHeadYPos( this.head_origin_z );
 		//
@@ -123,6 +124,12 @@ public class JumpingAnimation : CharAnimation
 	public JumpingAnimation( GameObject player, int jumpDuration ) : base( player )
 	{
 		this.jumpDuration = jumpDuration;
+	}
+	
+	public override void start()
+	{
+		this.player.transform.localEulerAngles = new Vector3(275,90,90); // lean character forward a little bit
+		base.start();
 	}
 	
 	public override void update ()
