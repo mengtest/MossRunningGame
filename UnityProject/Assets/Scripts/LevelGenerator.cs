@@ -19,13 +19,18 @@ public class LevelGenerator
 	{
 		if(this.elapsed % 120 == 0)
 		{
-			Debug.Log( "make fence!");
+			Debug.Log( "make crate!");
 			this.factory.makeObstacle();
 		}
 		if(this.elapsed % 90 == 0)
 		{
 			Debug.Log ("make coin!");
 			this.factory.makeCoin();
+		}
+		if(this.elapsed % 40 == 0)
+		{
+			Debug.Log( "make fence!");
+			this.factory.makeBackgroundFence();
 		}
 		
 		this.elapsed++;
@@ -39,11 +44,14 @@ internal class ObstacleFactory
 {
 	private GameObject primordialCrate;
 	private GameObject primordialCoin;
+	private GameObject primordialFence;
 	
 	public ObstacleFactory()
 	{
 		this.primordialCrate = GameObject.Find("PrimordialCrate");
 		this.primordialCoin = GameObject.Find("PrimordialCoin");
+		this.primordialFence = GameObject.Find("BackgroundFence");
+		
 		ObstacleBehaviour fb = this.primordialCrate.GetComponent("ObstacleBehaviour") as ObstacleBehaviour;
 		fb.garbageCollectable = false;
 	}
@@ -72,6 +80,27 @@ internal class ObstacleFactory
 			fb.garbageCollectable = true;
 			
 			return coin;
+		}
+		else
+		{
+			return null;
+		}
+	}
+	
+	public GameObject makeBackgroundFence()
+	{
+		if(this.primordialFence)
+		{
+			GameObject obstacle = (GameObject)GameObject.Instantiate( this.primordialFence );
+			Vector3 pos = this.primordialFence.transform.position;
+			obstacle.transform.position = new Vector3(pos.x, pos.y, pos.z);
+			
+			BackgroundFence fb = obstacle.GetComponent("BackgroundFence") as BackgroundFence;
+			fb.speed = -0.15f;
+			fb.garbageCollectable = true;
+			
+			return obstacle;
+			
 		}
 		else
 		{
