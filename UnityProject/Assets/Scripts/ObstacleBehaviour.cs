@@ -33,12 +33,31 @@ public class ObstacleBehaviour : MonoBehaviour {
 		}
 	}
 	
-	void OnCollisionEnter( Collision collision )
+	/*void OnCollisionEnter( Collision collision )
 	{
+	}*/
+	
+	void OnTriggerEnter( Collider other )
+	{
+		Debug.Log ("crate colliding with " + other);
 	    //Debug.Log ("collision!");
-		if(!this.gameObject.audio.isPlaying)
+		if(this.gameObject.audio)
 		{
-			this.gameObject.audio.Play();
+			if(!this.gameObject.audio.isPlaying)
+			{
+				this.gameObject.audio.Play();
+			}
 		}
-	}		
+		Vector3 pos = other.gameObject.transform.position;
+		
+		pos.x = pos.x + this.speed * 3.0f;
+		
+		other.gameObject.transform.position = pos;
+	}
+	
+	void OnTriggerStay( Collider other )
+	{
+		
+	}
+	
 }

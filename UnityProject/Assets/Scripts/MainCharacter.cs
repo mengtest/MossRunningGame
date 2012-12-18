@@ -22,6 +22,11 @@ public class MainCharacter : MonoBehaviour
 	void OnCollisionEnter( Collision collision )
 	{
 	    //Debug.Log ("collision!!!!!!!!!!");
-	}	
+	}
+	
+	void OnTriggerEnter( Collider other )
+	{
+		Debug.Log ("colliding with " + other);
+	}
 	
 }
