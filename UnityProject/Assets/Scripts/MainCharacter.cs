@@ -4,7 +4,7 @@ using System.Collections;
 public class MainCharacter : MonoBehaviour
 {
 	
-	private PlayerFSM fsm;
+	private PlayerFSM fsm;	
 	
 	// Use this for initialization
 	void Start ()
@@ -26,7 +26,13 @@ public class MainCharacter : MonoBehaviour
 	
 	void OnTriggerEnter( Collider other )
 	{
-		Debug.Log ("colliding with " + other);
+		if(other.gameObject.tag=="crate")
+		{
+			Debug.Log("oh! no! a crate!");
+		}
+		if(other.gameObject.tag=="coin")
+		{
+		}
 	}
 	
 }

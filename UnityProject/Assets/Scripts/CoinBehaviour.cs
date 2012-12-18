@@ -14,6 +14,8 @@ public class CoinBehaviour : MonoBehaviour {
 	
 		if(this.markedToDestroy)
 		{
+			AudioSource.PlayClipAtPoint(this.gameObject.audio.clip, this.gameObject.transform.position);
+			
 			Destroy( this.gameObject );
 			Destroy( this );
 		}			
@@ -22,11 +24,21 @@ public class CoinBehaviour : MonoBehaviour {
 	//void OnCollisionEnter( Collision collision )
 	void OnTriggerEnter( Collider other )
 	{
-	    Debug.Log ("COIN collision! " + other.gameObject.tag );
+	    
 		
-		if(this.gameObject.tag != other.gameObject.tag)
+		if(other.gameObject.tag == "Player")
 		{
 			this.markedToDestroy = true;		
+			//
+			Debug.Log ("COIN collision! " + other.gameObject.tag );
+			/*
+			if(this.gameObject.audio)
+			{
+				if(!this.gameObject.audio.isPlaying)
+				{
+					this.gameObject.audio.Play();
+				}
+			}*/
 		}
 	}	
 }

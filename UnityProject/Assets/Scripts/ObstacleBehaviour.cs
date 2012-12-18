@@ -48,16 +48,19 @@ public class ObstacleBehaviour : MonoBehaviour {
 				this.gameObject.audio.Play();
 			}
 		}
-		Vector3 pos = other.gameObject.transform.position;
-		
-		pos.x = pos.x + this.speed * 3.0f;
-		
-		other.gameObject.transform.position = pos;
 	}
 	
 	void OnTriggerStay( Collider other )
 	{
-		
+		if(other.gameObject.tag == "Player")
+		{
+			if(other.gameObject.transform.position.x < this.gameObject.transform.position.x)
+			{
+				Vector3 pos = other.gameObject.transform.position;
+				pos.x = pos.x + this.speed * 2.0f;		
+				other.gameObject.transform.position = pos;
+			}
+		}		
 	}
 	
 }
