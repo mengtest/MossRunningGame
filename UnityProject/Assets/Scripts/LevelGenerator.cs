@@ -19,20 +19,16 @@ public class LevelGenerator
 	{
 		if(this.elapsed % 120 == 0)
 		{
-			Debug.Log( "make crate!");
 			this.factory.makeObstacle();
 		}
 		if(this.elapsed % 90 == 0)
 		{
-			Debug.Log ("make coin!");
 			this.factory.makeCoin();
 		}
 		if(this.elapsed % 40 == 0)
 		{
-			Debug.Log( "make fence!");
 			this.factory.makeBackgroundFence();
-		}
-		
+		}		
 		this.elapsed++;
 	}
 	

@@ -4,7 +4,8 @@ using System.Collections;
 public class ObstacleBehaviour : MonoBehaviour {
 	
 	public bool garbageCollectable = true;
-	public float speed = -0.15f;
+	public float speed = 0f;
+	public float leftsideBound = -20.0f;
 	// Use this for initialization
 	void Start () {
 	
@@ -18,7 +19,7 @@ public class ObstacleBehaviour : MonoBehaviour {
 		// check removal position
 		
 		Vector3 pos = this.gameObject.transform.position;
-		if( pos.x < -20 )
+		if( pos.x < this.leftsideBound )
 		{
 			this.speed = 0;
 		}
