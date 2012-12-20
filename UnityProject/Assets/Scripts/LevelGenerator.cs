@@ -101,7 +101,7 @@ internal class ObstacleFactory
 		Vector3 pos = this.protoFence.transform.position;
 		obstacle.transform.position = new Vector3(pos.x, pos.y, pos.z);
 		
-		BackgroundFence fb = obstacle.GetComponent("BackgroundFence") as BackgroundFence;
+		ObstacleBehaviour fb = obstacle.GetComponent("ObstacleBehaviour") as ObstacleBehaviour;
 		fb.speed = -0.15f;
 		fb.garbageCollectable = true;
 		
