@@ -44,15 +44,15 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\Animations.cs" />
-     <Compile Include="Assets\Scripts\CoinBehaviour.cs" />
-     <Compile Include="Assets\Scripts\CrateBehaviour.cs" />
      <Compile Include="Assets\Scripts\Game.cs" />
      <Compile Include="Assets\Scripts\LevelGenerator.cs" />
-     <Compile Include="Assets\Scripts\MainCharacter.cs" />
      <Compile Include="Assets\Scripts\ObjectPool.cs" />
-     <Compile Include="Assets\Scripts\ObstacleBehaviour.cs" />
-     <Compile Include="Assets\Scripts\PlayerFSM.cs" />
+     <Compile Include="Assets\Scripts\Obstacles\CoinBehaviour.cs" />
+     <Compile Include="Assets\Scripts\Obstacles\CrateBehaviour.cs" />
+     <Compile Include="Assets\Scripts\Obstacles\ObstacleBehaviour.cs" />
+     <Compile Include="Assets\Scripts\Player\CharAnimation.cs" />
+     <Compile Include="Assets\Scripts\Player\MainCharacter.cs" />
+     <Compile Include="Assets\Scripts\Player\PlayerFSM.cs" />
      <None Include="Assets\Standard Assets\Projectors\Blob-Shadow\ShadowProjection.shader" />
      <None Include="Assets\Shaders\PlainColor.shader" />
   </ItemGroup>
