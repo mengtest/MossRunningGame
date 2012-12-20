@@ -29,25 +29,25 @@ public class CharAnimation
 	}
 
 	// Use this for initialization
-	public virtual void start ()
+	public virtual void Start ()
 	{
 		this.elapsed = 0;
 	}
 	
 	// Update is called once per frame
-	public virtual void update ()
+	public virtual void Update ()
 	{
 		this.elapsed++;
 	}
 	
-	protected void setPlayerYPos( float y )
+	protected void SetPlayerYPos( float y )
 	{
 		Vector3 pos = this.player.transform.localPosition;
 		pos.y = y;
 		this.player.transform.localPosition = pos;
 	}
 	
-	protected void setHeadYPos( float y )
+	protected void SetHeadYPos( float y )
 	{
 		Vector3 pos = this.head.localPosition;
 		pos.z = y;
@@ -55,7 +55,7 @@ public class CharAnimation
 	}
 	
 	
-	protected void setJointAngle( Transform tr, float angle )
+	protected void SetJointAngle( Transform tr, float angle )
 	{
 		Vector3 angles = tr.localEulerAngles;
 		angles.y = angle;
@@ -75,43 +75,42 @@ public class RunningAnimation : CharAnimation
 	{
 	}
 	
-	public override void start()
+	public override void Start()
 	{
 		this.player.transform.localEulerAngles = new Vector3(275,90,90); // lean character forward a little bit
 		
-		this.setHeadYPos( this.head_origin_z );
+		this.SetHeadYPos( this.head_origin_z );
 		//
-		base.start();
+		base.Start();
 	}
 	
-	public override void update()
+	public override void Update()
 	{
 		float r = (float)this.elapsed / shoulderCycle;
 		
 		float sin = Mathf.Sin ( r * Mathf.PI * 2);
 		
-		this.setJointAngle( shoulderLeft,    sin * this.shoulderAmplitude );
-		this.setJointAngle( shoulderRight, - sin * this.shoulderAmplitude );
+		this.SetJointAngle( shoulderLeft,    sin * this.shoulderAmplitude );
+		this.SetJointAngle( shoulderRight, - sin * this.shoulderAmplitude );
 		
-		this.setJointAngle( legLeft,    sin * this.shoulderAmplitude );
-		this.setJointAngle( legRight, - sin * this.shoulderAmplitude );
+		this.SetJointAngle( legLeft,    sin * this.shoulderAmplitude );
+		this.SetJointAngle( legRight, - sin * this.shoulderAmplitude );
 		
 		float cos = Mathf.Cos( r * Mathf.PI * 2 * 2 );
-		this.setPlayerYPos( cos * 0.1f );
+		this.SetPlayerYPos( cos * 0.1f );
 		
-		this.rotateHead( r );
+		this.RotateHead( r );
 		//
-		base.update();
+		base.Update();
 	}
 	
-	private void rotateHead( float r )
+	private void RotateHead( float r )
 	{
 		Vector3 angles = this.neck.localEulerAngles;
 		angles.x = Mathf.Sin ( r * Mathf.PI * 2 ) * this.neckAmplitude;
 		//angles.y = Mathf.Sin ( r * Mathf.PI * 1 ) * this.neckAmplitude;
 		this.neck.localEulerAngles = angles;
 	}	
-	
 	
 }
 
@@ -125,31 +124,29 @@ public class JumpingAnimation : CharAnimation
 		this.jumpDuration = jumpDuration;
 	}
 	
-	public override void start()
+	public override void Start()
 	{
 		this.player.transform.localEulerAngles = new Vector3(275,90,90); // lean character forward a little bit
-		base.start();
+		base.Start();
 		this.player.audio.Play();
 	}
 	
-	public override void update ()
+	public override void Update ()
 	{
 		float r = ((float)this.elapsed) / ((float)this.jumpDuration);
-
 		float py = Mathf.Abs( Mathf.Sin( r * Mathf.PI ) * this.jumpHeight );
-		this.setPlayerYPos( py );
-
-		this.rotateHead( r );
+		this.SetPlayerYPos( py );
 		//
-		base.update ();
+		this.RotateHead( r );
+		//
+		base.Update ();
 	}
 	
-	private void rotateHead( float r )
+	private void RotateHead( float r )
 	{
 		Vector3 angles = this.neck.localEulerAngles;
 		angles.z = Mathf.Sin ( r * Mathf.PI  ) * 45;
 		this.neck.localEulerAngles = angles;
-		
 	}	
 	
 }

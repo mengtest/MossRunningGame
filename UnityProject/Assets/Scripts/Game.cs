@@ -11,9 +11,7 @@ public class Game : MonoBehaviour {
 	void Start ()
 	{
 		this.player = GameObject.FindGameObjectWithTag("Player");
-		
 		this.levelGenerator = new LevelGenerator();		
-		
 		this.gameRunning = true;
 	}
 	

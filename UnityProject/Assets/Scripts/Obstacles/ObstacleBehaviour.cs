@@ -8,11 +8,9 @@ public class ObstacleBehaviour : MonoBehaviour {
 	public float speed = -0.15f;
 	public bool running = false;
 	
-	// Use this for initialization
 	void Start () {
 	}
 	
-	// Update is called once per frame
 	void Update ()
 	{		
 		if(this.running) 

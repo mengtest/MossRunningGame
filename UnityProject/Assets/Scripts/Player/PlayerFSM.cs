@@ -59,11 +59,11 @@ public class PlayerState
 	}
 	public virtual void Start()
 	{
-		if(this.animation!=null) this.animation.start();
+		if(this.animation!=null) this.animation.Start();
 	}
 	public virtual void Update()
 	{
-		if(this.animation!=null) this.animation.update();
+		if(this.animation!=null) this.animation.Update();
 	}
 	public virtual void End()
 	{
