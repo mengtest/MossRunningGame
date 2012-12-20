@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class MainCharacter : MonoBehaviour
+public class PlayerBehaviour : MonoBehaviour
 {
 	
 	private PlayerFSM fsm;	

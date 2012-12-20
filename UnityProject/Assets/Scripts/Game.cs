@@ -12,7 +12,7 @@ public class Game : MonoBehaviour {
 	{
 		this.player = GameObject.FindGameObjectWithTag("Player");
 		
-		this.levelGenerator = new LevelGenerator();
+		this.levelGenerator = new LevelGenerator();		
 		
 		this.gameRunning = true;
 	}

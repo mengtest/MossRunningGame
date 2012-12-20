@@ -3,13 +3,13 @@ using System.Collections;
 
 public class PlayerFSM
 {
-	private MainCharacter character;
+	private PlayerBehaviour character;
 	
 	private PlayerState currentState;
 	private PlayerState jumpingState;
 	private PlayerState runningState;
 	
-	public PlayerFSM( MainCharacter character )
+	public PlayerFSM( PlayerBehaviour character )
 	{
 		this.character = character;
 	}
@@ -48,11 +48,11 @@ public class PlayerFSM
 public class PlayerState
 {
 	protected PlayerFSM fsm;
-	protected MainCharacter character;
+	protected PlayerBehaviour character;
 	
 	protected CharAnimation animation;
 	
-	public PlayerState( PlayerFSM fsm, MainCharacter character )
+	public PlayerState( PlayerFSM fsm, PlayerBehaviour character )
 	{
 		this.fsm = fsm;
 		this.character = character;
@@ -80,7 +80,7 @@ public class PlayerState
 
 internal class Running : PlayerState
 {
-	public Running( PlayerFSM fsm, MainCharacter character ) : base( fsm, character )
+	public Running( PlayerFSM fsm, PlayerBehaviour character ) : base( fsm, character )
 	{
 		this.animation = new RunningAnimation( character.gameObject ); 		
 	}	
@@ -116,7 +116,7 @@ internal class Jumping : PlayerState
 	private int elapsed = 0;	
 	private int jumpDuration = 60;
 	
-	public Jumping( PlayerFSM fsm, MainCharacter character ) : base( fsm, character )
+	public Jumping( PlayerFSM fsm, PlayerBehaviour character ) : base( fsm, character )
 	{
 		this.animation = new JumpingAnimation( this.character.gameObject, this.jumpDuration ); 
 	}	

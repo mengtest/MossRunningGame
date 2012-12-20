@@ -51,7 +51,7 @@
      <Compile Include="Assets\Scripts\Obstacles\CrateBehaviour.cs" />
      <Compile Include="Assets\Scripts\Obstacles\ObstacleBehaviour.cs" />
      <Compile Include="Assets\Scripts\Player\CharAnimation.cs" />
-     <Compile Include="Assets\Scripts\Player\MainCharacter.cs" />
+     <Compile Include="Assets\Scripts\Player\PlayerBehaviour.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerFSM.cs" />
      <None Include="Assets\Standard Assets\Projectors\Blob-Shadow\ShadowProjection.shader" />
      <None Include="Assets\Shaders\PlainColor.shader" />
