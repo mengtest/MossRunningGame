@@ -6,6 +6,8 @@ Simple running game featuring IT Crowd's Maurice Moss.
 I'm using [Blender](http://www.blender.org/) and [Unity3D](http://unity3d.com/).
 The original character design is from [CubeeCraft](http://www.cubeecraft.com/).
 
+[Test Online](http://pixeltoys.net/demos/unity/moss/v00/)
+
 ![actual gameplay footage](https://lh4.googleusercontent.com/-A2q07OIxOKY/UNNGKQxKxYI/AAAAAAAATIg/EdJS4yPYZYk/s540/moss-bush.png)
 
 Moss character in Blender:
