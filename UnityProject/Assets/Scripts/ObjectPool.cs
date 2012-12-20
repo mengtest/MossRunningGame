@@ -21,24 +21,30 @@ public class ObjectPool
 	
 	public bool add( GameObject obj )
 	{
-		//if(_list.Count < _maxQty)
-		//{
+		if(_list.Count < _maxQty)
+		{
 			_list.Add(obj);
 			return true;
-		//}
-		//else
-		//{
-		//	return false;
-		//}
+		}
+		else
+		{
+			return false;
+		}
 	}
 	
 	public GameObject getNextObject()
 	{
-		Debug.Log( "count:" + this._list.Count );
-		GameObject item = this._list[0];
-		this._list.RemoveAt(0);
-		this._list.Insert( this._list.Count, item );
-		return item;
+		if(_list.Count>0)
+		{
+			GameObject item = this._list[0];
+			this._list.RemoveAt(0);
+			this._list.Insert( this._list.Count, item );
+			return item;
+		}
+		else
+		{
+			return null;
+		}
 	}
 	
 	/// <summary>

@@ -16,7 +16,7 @@ public class PlayerBehaviour : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-		this.fsm.update();
+		this.fsm.Update();
 	}
 	
 	void OnCollisionEnter( Collision collision )

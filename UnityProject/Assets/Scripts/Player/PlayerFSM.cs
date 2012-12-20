@@ -18,28 +18,28 @@ public class PlayerFSM
 	{
 		this.runningState = new Running( this, this.character );
 		this.jumpingState = new Jumping( this, this.character );
-		this.goRunning();
+		this.GoRunning();
 	}
 	
-	public void update()
+	public void Update()
 	{
-		this.currentState.update();
+		this.currentState.Update();
 	}
 	
-	internal void goRunning()
+	internal void GoRunning()
 	{
-		this.setState ( this.runningState );
+		this.SetState ( this.runningState );
 	}
-	internal void goJumping()
+	internal void GoJumping()
 	{
-		this.setState ( this.jumpingState );
+		this.SetState ( this.jumpingState );
 	}
 	
-	private void setState( PlayerState new_state)
+	private void SetState( PlayerState new_state)
 	{
-		if(this.currentState!=null) this.currentState.end();
+		if(this.currentState!=null) this.currentState.End();
 		this.currentState = new_state;
-		this.currentState.start();
+		this.currentState.Start();
 	}
 		
 }
@@ -57,21 +57,21 @@ public class PlayerState
 		this.fsm = fsm;
 		this.character = character;
 	}
-	public virtual void start()
+	public virtual void Start()
 	{
 		if(this.animation!=null) this.animation.start();
 	}
-	public virtual void update()
+	public virtual void Update()
 	{
 		if(this.animation!=null) this.animation.update();
 	}
-	public virtual void end()
+	public virtual void End()
 	{
 	}	
 	
-	protected void setCharacterYPos( float y )
+	protected void SetCharacterYPos( float y )
 	{
-		//Debug.Log("PlayerState::setCharacterYPos " + y);
+		//Debug.Log("PlayerState::SetCharacterYPos " + y);
 		Vector3 pos = this.character.gameObject.transform.position;
 		pos.y = y;
 		this.character.gameObject.transform.position = pos;		
@@ -85,7 +85,7 @@ internal class Running : PlayerState
 		this.animation = new RunningAnimation( character.gameObject ); 		
 	}	
 	
-	public override void update()
+	public override void Update()
 	{
 		//this.character.gameObject.transform.Rotate(Mathf.PI/8,Mathf.PI/8,Mathf.PI/8);
 		//this.setCharacterYPos(0);
@@ -102,10 +102,10 @@ internal class Running : PlayerState
 		bool k = Input.anyKey;
 		if(k)
 		{
-			this.fsm.goJumping();
+			this.fsm.GoJumping();
 		}
 		//
-		base.update();
+		base.Update();
 	}
 }
 
@@ -121,22 +121,22 @@ internal class Jumping : PlayerState
 		this.animation = new JumpingAnimation( this.character.gameObject, this.jumpDuration ); 
 	}	
 	
-	public override void start()
+	public override void Start()
 	{
 		this.elapsed = 0;
-		base.start();
+		base.Start();
 	}
-	public override void update()
+	public override void Update()
 	{
 		this.elapsed ++;
 		//
 		if(this.elapsed>this.jumpDuration)
 		{
-			this.fsm.goRunning();
+			this.fsm.GoRunning();
 		}
-		base.update();
+		base.Update();
 	}
-	public override void end()
+	public override void End()
 	{
 		this.elapsed = 0;
 	}

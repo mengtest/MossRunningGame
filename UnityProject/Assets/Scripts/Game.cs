@@ -21,12 +21,12 @@ public class Game : MonoBehaviour {
 	{
 		if(this.gameRunning)
 		{
-			this.levelGenerator.update();
-			this.checkGameOver();
+			this.levelGenerator.Update();
+			this.CheckGameOver();
 		}
 	}
 	
-	void checkGameOver ()
+	void CheckGameOver ()
 	{
 		if(this.player.transform.localPosition.x<-15)
 		{
