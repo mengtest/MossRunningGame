@@ -3,6 +3,7 @@ using System.Collections;
 
 public class ObjectPool
 {
+	private GameObject _prototype;
 	private uint _maxQty;
 	private System.Collections.Generic.List<GameObject> _list;
 	
@@ -13,23 +14,12 @@ public class ObjectPool
 	/// <param name='max_qty'>
 	/// Max_qty.
 	/// </param>
-	public ObjectPool( uint max_qty )
+	public ObjectPool( GameObject prototype, uint max_qty )
 	{
+		_prototype = prototype;
 		_maxQty = max_qty;
 		_list = new System.Collections.Generic.List<GameObject>();
-	}
-	
-	public bool add( GameObject obj )
-	{
-		if(_list.Count < _maxQty)
-		{
-			_list.Add(obj);
-			return true;
-		}
-		else
-		{
-			return false;
-		}
+		this.populate ();
 	}
 	
 	public GameObject getNextObject()
@@ -46,6 +36,20 @@ public class ObjectPool
 			return null;
 		}
 	}
+	
+	///////////////
+	
+	private void populate()
+	{
+		Vector3 pos = _prototype.transform.position;
+		for (int i = 0; i < this.maxQty; i++) {
+			GameObject obj = (GameObject)GameObject.Instantiate( _prototype );
+			obj.transform.position = new Vector3(pos.x, pos.y, pos.z);
+			this._list.Add(obj);
+		}
+	}	
+	
+	///////////////
 	
 	/// <summary>
 	/// Gets the list.
@@ -67,7 +71,12 @@ public class ObjectPool
 	public uint maxQty
 	{
 		get { return _maxQty;	}
-	}	
+	}
+	
+	public GameObject prototype
+	{
+		get { return _prototype; }
+	}
 	
 }
 

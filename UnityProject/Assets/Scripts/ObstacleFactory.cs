@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 internal class ObstacleFactory
 {
@@ -10,11 +11,11 @@ internal class ObstacleFactory
 	private GameObject protoFence;
 	private GameObject protoBush;
 	
+	private Dictionary<string, ObjectPool> _objectPools;
 	private ObjectPool _cratePool;
 	private ObjectPool _coinPool;
 	private ObjectPool _fencePool;
 	private ObjectPool _bushPool;
-	private System.Collections.Generic.List<GameObject> _obstaclesList;
 	
 	public ObstacleFactory()
 	{
@@ -23,19 +24,32 @@ internal class ObstacleFactory
 		this.protoFence = GameObject.Find("ProtoFence");
 		this.protoBush = GameObject.Find ("ProtoBush");
 		//
-		this._obstaclesList = new System.Collections.Generic.List<GameObject>();
+		this._cratePool = new ObjectPool(this.protoCrate, 3);
+		this._coinPool =  new ObjectPool(this.protoCoin,  3);
+		this._fencePool = new ObjectPool(this.protoFence, 8);
+		this._bushPool =  new ObjectPool(this.protoBush,  5);
 		//
-		this._cratePool = new ObjectPool(3);		
-		this.populateObjectPool( this._cratePool, this.protoCrate);
-		//
-		this._coinPool = new ObjectPool(3);		
-		this.populateObjectPool( this._coinPool, this.protoCoin);
-		//
-		this._fencePool = new ObjectPool(8);		
-		this.populateObjectPool( this._fencePool, protoFence);
-		//
-		this._bushPool = new ObjectPool( 5 );
-		this.populateObjectPool( this._bushPool, protoBush );
+		_objectPools = new Dictionary<string, ObjectPool>();
+		_objectPools.Add("crate", this._cratePool);
+		_objectPools.Add("coin", this._coinPool);
+		_objectPools.Add("fence", this._fencePool);
+		_objectPools.Add("bush", this._bushPool);
+		
+	}
+	
+	public GameObject TriggerObstacle( string type )
+	{
+		ObjectPool pool = _objectPools[type];
+		return MakeObject (pool);			
+	}
+	
+	public GameObject MakeObject( ObjectPool pool )
+	{
+		GameObject obstacle = pool.getNextObject();
+		var pos = pool.prototype.transform.position;
+		obstacle.transform.position = new Vector3(pos.x,pos.y,pos.z);
+		this.initObstacle(obstacle);
+		return obstacle;
 	}
 	
 	public GameObject MakeObstacle( )
@@ -81,10 +95,10 @@ internal class ObstacleFactory
 	public float setCameraSpeed( float speed )
 	{
 		_cameraSpeed = speed;
-		int n = _obstaclesList.Count;
-		for (int i = 0; i < n; i++) {
-			this.updateSpeed( _obstaclesList[i] );
-		}
+		this.updateSpeedInPool( this._cratePool );
+		this.updateSpeedInPool( this._coinPool );
+		this.updateSpeedInPool( this._fencePool );
+		this.updateSpeedInPool( this._bushPool );
 		return this._cameraSpeed;
 	}
 	
@@ -98,30 +112,18 @@ internal class ObstacleFactory
 		fb.garbageCollectable = true;		
 	}
 	
+	private void updateSpeedInPool( ObjectPool pool )
+	{
+		int n = pool.list.Count;
+		for (int i = 0; i < n; i++) {
+			this.updateSpeed( pool.list[i] );
+		}
+	}
+	
 	private void updateSpeed( GameObject obstacle )
 	{
 		ObstacleBehaviour fb = obstacle.GetComponent("ObstacleBehaviour") as ObstacleBehaviour;
 		fb.speed = this._cameraSpeed;
-	}
-	
-	/// <summary>
-	/// Populates the specified object pool creating instances of the specified prototype GameObject.
-	/// </summary>
-	/// <param name='pool'>
-	/// ObjectPool.
-	/// </param>
-	/// <param name='proto'>
-	/// Prototype.
-	/// </param>
-	private void populateObjectPool( ObjectPool pool, GameObject proto )
-	{
-		Vector3 pos = proto.transform.position;
-		for (int i = 0; i < pool.maxQty; i++) {
-			GameObject obj = (GameObject)GameObject.Instantiate( proto );
-			obj.transform.position = new Vector3(pos.x, pos.y, pos.z);;
-			pool.add( obj );
-			this._obstaclesList.Add ( obj );
-		}
 	}
 	
 }

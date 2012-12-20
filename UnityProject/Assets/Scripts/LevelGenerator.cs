@@ -19,19 +19,19 @@ public class LevelGenerator
 	{
 		if(this.elapsed % 120 == 0 && this.elapsed > 240)
 		{
-			this.factory.MakeObstacle();
+			this.factory.TriggerObstacle("crate");
 		}
 		if(this.elapsed % 90 == 0 && this.elapsed > 0)
 		{
-			this.factory.MakeCoin();
+			this.factory.TriggerObstacle("coin");
 		}		
 		if(this.elapsed % this._fenceInterval == 0)
 		{
-			this.factory.MakeFence();
+			this.factory.TriggerObstacle("fence");
 		}
 		if(this.elapsed % 60 == 0 )
 		{
-			this.factory.MakeBush();
+			this.factory.TriggerObstacle("bush");
 		}
 		/*if(this.elapsed % 320 == 0 && this.elapsed > 0)
 		{
