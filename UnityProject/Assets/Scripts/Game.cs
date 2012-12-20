@@ -8,7 +8,6 @@ public class Game : MonoBehaviour {
 	
 	private LevelGenerator levelGenerator;
 	
-	// Use this for initialization
 	void Start ()
 	{
 		this.player = GameObject.FindGameObjectWithTag("Player");
@@ -18,7 +17,6 @@ public class Game : MonoBehaviour {
 		this.gameRunning = true;
 	}
 	
-	// Update is called once per frame
 	void Update ()
 	{
 		if(this.gameRunning)

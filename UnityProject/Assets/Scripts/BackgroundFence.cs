@@ -21,11 +21,6 @@ public class BackgroundFence : MonoBehaviour {
 		Vector3 pos = this.gameObject.transform.position;
 		if( pos.x < -30 )
 		{
-			if(this.garbageCollectable)
-			{
-				Destroy( this.gameObject );
-				Destroy( this );
-			}
 			this.speed = 0;
 		}
 		

@@ -42,24 +42,38 @@ public class LevelGenerator
 
 internal class ObstacleFactory
 {
-	private GameObject primordialCrate;
-	private GameObject primordialCoin;
-	private GameObject primordialFence;
+	private GameObject protoCrate;
+	private GameObject protoCoin;
+	private GameObject protoFence;
+	
+	private ObjectPool _cratePool;
+	private ObjectPool _coinPool;
+	private ObjectPool _fencePool;
 	
 	public ObstacleFactory()
 	{
-		this.primordialCrate = GameObject.Find("PrimordialCrate");
-		this.primordialCoin = GameObject.Find("PrimordialCoin");
-		this.primordialFence = GameObject.Find("BackgroundFence");
+		this.protoCrate = GameObject.Find("ProtoCrate");
+		this.protoCoin = GameObject.Find("ProtoCoin");
+		this.protoFence = GameObject.Find("ProtoFence");
 		
-		ObstacleBehaviour fb = this.primordialCrate.GetComponent("ObstacleBehaviour") as ObstacleBehaviour;
-		fb.garbageCollectable = false;
+		this._cratePool = new ObjectPool(6);		
+		this.populateObjectPool( this._cratePool, this.protoCrate);
+		
+		this._coinPool = new ObjectPool(6);		
+		this.populateObjectPool( this._coinPool, this.protoCoin);
+		
+		this._fencePool = new ObjectPool(8);		
+		this.populateObjectPool( this._fencePool, protoFence);		
+		
+		//ObstacleBehaviour fb = this.primordialCrate.GetComponent("ObstacleBehaviour") as ObstacleBehaviour;
+		//fb.garbageCollectable = false;
 	}
 	
 	public GameObject makeObstacle( )
 	{
-		GameObject obstacle = (GameObject)GameObject.Instantiate( this.primordialCrate );
-		obstacle.transform.position = new Vector3(30,1,0);
+		GameObject obstacle = this._cratePool.getNextObject();
+		var pos = this.protoCrate.transform.position;
+		obstacle.transform.position = new Vector3(pos.x,pos.y,pos.z);
 		
 		ObstacleBehaviour fb = obstacle.GetComponent("ObstacleBehaviour") as ObstacleBehaviour;
 		fb.speed = -0.15f;
@@ -70,41 +84,49 @@ internal class ObstacleFactory
 	
 	public GameObject makeCoin( )
 	{
-		if(this.primordialCoin)
-		{
-			GameObject coin = (GameObject)GameObject.Instantiate( this.primordialCoin );
-			coin.transform.position = new Vector3(30,6,0);		
-			
-			ObstacleBehaviour fb = coin.GetComponent("ObstacleBehaviour") as ObstacleBehaviour;
-			fb.speed = -0.15f;
-			fb.garbageCollectable = true;
-			
-			return coin;
-		}
-		else
-		{
-			return null;
-		}
+		GameObject obstacle = this._coinPool.getNextObject();
+		var pos = this.protoCoin.transform.position;
+		obstacle.transform.position = new Vector3(pos.x,pos.y,pos.z);
+		
+		ObstacleBehaviour fb = obstacle.GetComponent("ObstacleBehaviour") as ObstacleBehaviour;
+		fb.speed = -0.15f;
+		fb.garbageCollectable = true;
+		
+		return obstacle;
 	}
 	
 	public GameObject makeBackgroundFence()
 	{
-		if(this.primordialFence)
-		{
-			GameObject obstacle = (GameObject)GameObject.Instantiate( this.primordialFence );
-			Vector3 pos = this.primordialFence.transform.position;
-			obstacle.transform.position = new Vector3(pos.x, pos.y, pos.z);
-			
-			BackgroundFence fb = obstacle.GetComponent("BackgroundFence") as BackgroundFence;
-			fb.speed = -0.15f;
-			fb.garbageCollectable = true;
-			
-			return obstacle;
-			
-		}
-		else
-		{
-			return null;
+		GameObject obstacle = this._fencePool.getNextObject();
+		Vector3 pos = this.protoFence.transform.position;
+		obstacle.transform.position = new Vector3(pos.x, pos.y, pos.z);
+		
+		BackgroundFence fb = obstacle.GetComponent("BackgroundFence") as BackgroundFence;
+		fb.speed = -0.15f;
+		fb.garbageCollectable = true;
+		
+		return obstacle;			
+	}
+	
+	///////////////////////////////////////////////	
+	
+	/// <summary>
+	/// Populates the specified object pool creating instances of the specified prototype GameObject.
+	/// </summary>
+	/// <param name='pool'>
+	/// ObjectPool.
+	/// </param>
+	/// <param name='proto'>
+	/// Prototype.
+	/// </param>
+	private void populateObjectPool( ObjectPool pool, GameObject proto )
+	{
+		Vector3 pos = proto.transform.position;
+		for (int i = 0; i < pool.maxQty; i++) {
+			GameObject obj = (GameObject)GameObject.Instantiate( proto );
+			obj.transform.position = new Vector3(pos.x, pos.y, pos.z);;
+			pool.add( obj );
 		}
 	}
+	
 }

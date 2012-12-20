@@ -24,11 +24,6 @@ public class ObstacleBehaviour : MonoBehaviour {
 		Vector3 pos = this.gameObject.transform.position;
 		if( pos.x < -20 )
 		{
-			if(this.garbageCollectable)
-			{
-				Destroy( this.gameObject );
-				Destroy( this );
-			}
 			this.speed = 0;
 		}
 	}

@@ -50,6 +50,7 @@
      <Compile Include="Assets\Scripts\Game.cs" />
      <Compile Include="Assets\Scripts\LevelGenerator.cs" />
      <Compile Include="Assets\Scripts\MainCharacter.cs" />
+     <Compile Include="Assets\Scripts\ObjectPool.cs" />
      <Compile Include="Assets\Scripts\ObstacleBehaviour.cs" />
      <Compile Include="Assets\Scripts\PlayerFSM.cs" />
      <None Include="Assets\Standard Assets\Projectors\Blob-Shadow\ShadowProjection.shader" />
