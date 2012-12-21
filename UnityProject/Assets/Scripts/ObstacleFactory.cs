@@ -11,10 +11,11 @@ internal class ObstacleFactory
 	public ObstacleFactory()
 	{
 		_objectPools = new Dictionary<string, ObjectPool>();
-		_objectPools.Add("crate", new ObjectPool(GameObject.Find("ProtoCrate"), 3));
-		_objectPools.Add("coin",  new ObjectPool(GameObject.Find("ProtoCoin"),  3));
-		_objectPools.Add("fence", new ObjectPool(GameObject.Find("ProtoFence"), 8));
-		_objectPools.Add("bush",  new ObjectPool(GameObject.Find("ProtoBush"),  5));		
+		_objectPools.Add("crate", 		new ObjectPool(GameObject.Find("ProtoCrate"),		3));
+		_objectPools.Add("coin",  		new ObjectPool(GameObject.Find("ProtoCoin"),		3));
+		_objectPools.Add("fence", 		new ObjectPool(GameObject.Find("ProtoFence"),		8));
+		_objectPools.Add("bush",  		new ObjectPool(GameObject.Find("ProtoBush"),		5));
+		_objectPools.Add("brickwall",	new ObjectPool(GameObject.Find("ProtoBrickWall"),	4));
 	}
 	
 	public GameObject TriggerObstacle( string type )

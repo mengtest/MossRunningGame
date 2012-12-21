@@ -27,11 +27,11 @@ public class LevelGenerator
 		}		
 		if(this.elapsed % this._fenceInterval == 0)
 		{
-			this.factory.TriggerObstacle("fence");
+			//this.factory.TriggerObstacle("fence");
 		}
-		if(this.elapsed % 60 == 0 )
+		if(this.elapsed % 106 == 0 )
 		{
-			this.factory.TriggerObstacle("bush");
+			this.factory.TriggerObstacle("brickwall");
 		}
 		/*if(this.elapsed % 320 == 0 && this.elapsed > 0)
 		{
