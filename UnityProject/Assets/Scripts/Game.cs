@@ -30,6 +30,7 @@ public class Game : MonoBehaviour {
 		{
 			this.gameRunning = false;
 			Debug.Log ("Game Over");
+			Application.LoadLevel("Menu");
 		}
 	}
 }
