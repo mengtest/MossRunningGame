@@ -19,7 +19,7 @@ public class ObjectPool
 		_prototype = prototype;
 		_maxQty = max_qty;
 		_list = new System.Collections.Generic.List<GameObject>();
-		this.populate ();
+		this.populate();
 	}
 	
 	public GameObject getNextObject()
