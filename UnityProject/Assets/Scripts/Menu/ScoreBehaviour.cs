@@ -8,9 +8,7 @@ public class ScoreBehaviour : MonoBehaviour {
 
 	void Start () {
 		this.text = this.GetComponent(typeof(TextMesh)) as TextMesh;
+		this.text.text = "Score: " + SessionState.score.ToString();
 	}
 
-	public void UpdateText( string text ) {
-		this.text.text =  text;
-	}
 }
