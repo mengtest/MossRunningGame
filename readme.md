@@ -8,11 +8,8 @@ The original character design is from [CubeeCraft](http://www.cubeecraft.com/).
 
 [Test Online](http://pixeltoys.net/demos/unity/moss/v01/)
 
-![actual gameplay screen](http://pixeltoys.net/demos/photos/moss-gameplay-01.jpg)
+![](https://lh4.googleusercontent.com/-OFpbzF6Liow/UOgQmMYc8SI/AAAAAAAAUJ0/IwfgqV0KxWM/s540/moss-title.png)
 
 Moss character in Blender:
 
 ![Moss character in Blender](https://lh4.googleusercontent.com/-hhb345QOK6U/ULKNyhzs9sI/AAAAAAAASdU/_LPa_A_hASI/s540/2012-11-25)
-
-[More pictures](https://plus.google.com/photos/117007292162354262205/albums/5823358150098143089?authkey=CKmCiIS1rvGc8AE)
-[More pictures](https://lh4.googleusercontent.com/-A2q07OIxOKY/UNNGKQxKxYI/AAAAAAAATIg/EdJS4yPYZYk/s540/moss-bush.png)

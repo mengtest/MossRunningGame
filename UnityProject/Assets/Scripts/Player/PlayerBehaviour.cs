@@ -4,9 +4,12 @@ using System.Collections;
 public class PlayerBehaviour : MonoBehaviour
 {
 	private PlayerFSM fsm;	
-	
+
+	public int coinsCollected;
+
 	void Start ()
 	{
+		this.coinsCollected = 0;
 		this.fsm = new PlayerFSM( this );
 		this.fsm.start();
 	}
@@ -20,11 +23,11 @@ public class PlayerBehaviour : MonoBehaviour
 	{
 		if(other.gameObject.tag=="crate")
 		{
-			Debug.Log("oh! no! a crate!");
+			//Debug.Log("oh! no! a crate!");
 		}
 		if(other.gameObject.tag=="coin")
 		{
-			Debug.Log("yey! a coin!");
+			this.coinsCollected++;
 		}
 	}
 	
