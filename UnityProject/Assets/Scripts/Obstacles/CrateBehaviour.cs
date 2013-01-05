@@ -18,8 +18,6 @@ public class CrateBehaviour : MonoBehaviour
 	
 	void OnTriggerEnter( Collider other )
 	{
-		Debug.Log ("crate colliding with " + other);
-	    //Debug.Log ("collision!");
 		if(this.gameObject.audio)
 		{
 			if(!this.gameObject.audio.isPlaying)

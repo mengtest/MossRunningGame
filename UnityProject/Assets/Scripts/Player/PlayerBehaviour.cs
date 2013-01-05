@@ -3,13 +3,15 @@ using System.Collections;
 
 public class PlayerBehaviour : MonoBehaviour
 {
-	private PlayerFSM fsm;	
+	public event CoinCollectedHandler coinCollected;
+	private int totalCoins;
 
-	public int coinsCollected;
+	public delegate void CoinCollectedHandler( int total_coins );
+	private PlayerFSM fsm;
 
 	void Start ()
 	{
-		this.coinsCollected = 0;
+		this.totalCoins = 0;
 		this.fsm = new PlayerFSM( this );
 		this.fsm.start();
 	}
@@ -27,7 +29,8 @@ public class PlayerBehaviour : MonoBehaviour
 		}
 		if(other.gameObject.tag=="coin")
 		{
-			this.coinsCollected++;
+			this.totalCoins++;
+			this.coinCollected( this.totalCoins );
 		}
 	}
 	

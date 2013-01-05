@@ -16,10 +16,13 @@ public class Game : MonoBehaviour {
 		this.score = scoreText.GetComponent("ScoreBehaviour") as ScoreBehaviour;
 
 		this.player = GameObject.FindGameObjectWithTag("Player");
-		this.playerBehaviour = this.player.GetComponent("PlayerBehaviour") as PlayerBehaviour;
+
 		this.levelGenerator = new LevelGenerator();		
 		this.gameRunning = true;
 
+		// Listen for coin collection event
+		this.playerBehaviour = this.player.GetComponent("PlayerBehaviour") as PlayerBehaviour;
+		this.playerBehaviour.coinCollected += new PlayerBehaviour.CoinCollectedHandler( HandleCoinsCollected );
 	}
 	
 	void Update ()
@@ -27,14 +30,13 @@ public class Game : MonoBehaviour {
 		if(this.gameRunning)
 		{
 			this.levelGenerator.Update();
-			this.UpdateScore();
 			this.CheckGameOver();
 		}
 	}
 
-	void UpdateScore ()
+	public void HandleCoinsCollected( int total_coins )
 	{
-		this.score.UpdateText( this.playerBehaviour.coinsCollected.ToString() );
+		this.score.UpdateText( total_coins.ToString() );
 	}
 
 	void CheckGameOver ()
