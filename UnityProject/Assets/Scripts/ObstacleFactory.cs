@@ -28,16 +28,6 @@ internal class ObstacleFactory
 	{
 		return this._cameraSpeed;
 	}
-	public float setCameraSpeed( float speed )
-	{
-		_cameraSpeed = speed;
-		foreach (KeyValuePair<string, ObjectPool> pair in _objectPools)
-		{
-			ObjectPool pool = pair.Value;
-			this.updateSpeedInPool( pool );
-		}
-		return this._cameraSpeed;
-	}
 	
 	///////////////////////////////////////////////	
 	
@@ -57,15 +47,7 @@ internal class ObstacleFactory
 		fb.speed = this._cameraSpeed;
 		fb.garbageCollectable = true;		
 	}
-	
-	private void updateSpeedInPool( ObjectPool pool )
-	{
-		int n = pool.list.Count;
-		for (int i = 0; i < n; i++) {
-			this.updateSpeed( pool.list[i] );
-		}
-	}
-	
+
 	private void updateSpeed( GameObject obstacle )
 	{
 		ObstacleBehaviour fb = obstacle.GetComponent("ObstacleBehaviour") as ObstacleBehaviour;
