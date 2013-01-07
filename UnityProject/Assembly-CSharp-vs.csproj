@@ -54,6 +54,7 @@
      <Compile Include="Assets\Scripts\Obstacles\CoinBehaviour.cs" />
      <Compile Include="Assets\Scripts\Obstacles\CrateBehaviour.cs" />
      <Compile Include="Assets\Scripts\Obstacles\ObstacleBehaviour.cs" />
+     <Compile Include="Assets\Scripts\Obstacles\TreadmillBehaviour.cs" />
      <Compile Include="Assets\Scripts\Player\CharAnimation.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerBehaviour.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerFSM.cs" />

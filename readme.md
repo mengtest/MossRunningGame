@@ -13,3 +13,4 @@ The original character design is from [CubeeCraft](http://www.cubeecraft.com/).
 Moss character in Blender:
 
 ![Moss character in Blender](https://lh4.googleusercontent.com/-hhb345QOK6U/ULKNyhzs9sI/AAAAAAAASdU/_LPa_A_hASI/s540/2012-11-25)
+

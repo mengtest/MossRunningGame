@@ -18,7 +18,7 @@ internal class ObstacleFactory
 		_objectPools.Add("brickwall",	new ObjectPool(GameObject.Find("ProtoBrickWall"),	4));
 	}
 	
-	public GameObject TriggerObstacle( string type )
+	public GameObject createObstacle( string type )
 	{
 		ObjectPool pool = _objectPools[type];
 		return GetObstacle (pool);			
@@ -44,7 +44,7 @@ internal class ObstacleFactory
 	{
 		ObstacleBehaviour fb = obstacle.GetComponent("ObstacleBehaviour") as ObstacleBehaviour;
 		fb.running = true;
-		fb.speed = this._cameraSpeed;
+		//fb.speed = this._cameraSpeed;
 		fb.garbageCollectable = true;		
 	}
 

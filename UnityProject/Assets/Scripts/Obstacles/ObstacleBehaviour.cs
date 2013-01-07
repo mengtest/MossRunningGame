@@ -21,8 +21,10 @@ public class ObstacleBehaviour : MonoBehaviour {
 			if( pos.x < this.leftsideBound )
 			{
 				this.running = false;
+				this.gameObject.transform.parent = null;
 			}
 		}
+
 	}	
 	
 }

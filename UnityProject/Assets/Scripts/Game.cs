@@ -6,6 +6,7 @@ public class Game : MonoBehaviour {
 	private bool gameRunning;
 	private GameObject player;
 	private PlayerBehaviour playerBehaviour;
+	private TreadmillBehaviour treadmillBehabiour;
 	private TextMesh scoreText;
 	
 	private LevelGenerator levelGenerator;
@@ -14,7 +15,10 @@ public class Game : MonoBehaviour {
 	{
 		this.player = GameObject.FindGameObjectWithTag("Player");
 
-		this.levelGenerator = new LevelGenerator();		
+		GameObject treadmill = GameObject.Find ("Treadmill");
+		this.treadmillBehabiour = (TreadmillBehaviour)treadmill.GetComponent("TreadmillBehaviour");
+
+		this.levelGenerator = new LevelGenerator( treadmill );
 		this.gameRunning = true;
 
 		// Score TextMesh
@@ -24,6 +28,9 @@ public class Game : MonoBehaviour {
 		// Listen for coin collection event
 		this.playerBehaviour = this.player.GetComponent("PlayerBehaviour") as PlayerBehaviour;
 		this.playerBehaviour.coinCollected += new PlayerBehaviour.CoinCollectedHandler( HandleCoinsCollected );
+
+
+
 	}
 	
 	void Update ()
@@ -33,6 +40,8 @@ public class Game : MonoBehaviour {
 			this.levelGenerator.Update();
 			this.CheckGameOver();
 		}
+		this.treadmillBehabiour.running = this.gameRunning;
+
 	}
 
 	public void HandleCoinsCollected( int total_coins )

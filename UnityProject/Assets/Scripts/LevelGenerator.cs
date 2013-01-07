@@ -8,25 +8,36 @@ public class LevelGenerator
 {
 	private int elapsed = 0;
 	private ObstacleFactory factory;
-	
-	public LevelGenerator()
+	private GameObject treadmill;
+	public LevelGenerator( GameObject treadmill )
 	{
 		this.factory = new ObstacleFactory();
+		this.treadmill = treadmill;
 	}
 	
 	public void Update()
 	{
+
+		string obstacle_type = "";
+
 		if(this.elapsed % 120 == 0 && this.elapsed > 240)
 		{
-			this.factory.TriggerObstacle("crate");
+			obstacle_type = "crate";
 		}
 		if(this.elapsed % 90 == 0 && this.elapsed > 0)
 		{
-			this.factory.TriggerObstacle("coin");
+			obstacle_type = "coin";
+
 		}
 		if(this.elapsed % 106 == 0 )
 		{
-			this.factory.TriggerObstacle("brickwall");
+			obstacle_type = "brickwall";
+		}
+
+		if(obstacle_type!="")
+		{
+			GameObject new_obstacle = this.factory.createObstacle( obstacle_type );
+			new_obstacle.transform.parent = this.treadmill.transform;
 		}
 
 		this.elapsed++;
