@@ -1,6 +1,13 @@
+// Multiple clases in this file.
+// CharAnimation and some sub-classes: RunningAnimation and JumpingAnimation, for now.
+
+
 using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// It's probably best to use Blender animations instead of this, but I haven't got the time to learn to animate in Blender yet.
+/// </summary>
 public class CharAnimation
 {
 	protected GameObject player;

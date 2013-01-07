@@ -9,7 +9,7 @@ public class PlayerState
 	protected PlayerFSM fsm;
 	protected PlayerBehaviour character;
 	
-	protected CharAnimation animation;
+	protected CharAnimation animation; // It's probably best to use Blender animations instead of this, but I haven't got the time to learn to animate in Blender yet.
 	
 	public PlayerState( PlayerFSM fsm, PlayerBehaviour character )
 	{
