@@ -33,6 +33,7 @@ public class CrateBehaviour : MonoBehaviour
 		{
 			if(other.gameObject.transform.position.x < this.gameObject.transform.position.x)
 			{
+				// push player back
 				Vector3 pos = other.gameObject.transform.position;
 				pos.x = pos.x - 0.30f;		
 				other.gameObject.transform.position = pos;

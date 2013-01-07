@@ -36,22 +36,7 @@ internal class ObstacleFactory
 		GameObject obstacle = pool.getNextObject();
 		var pos = pool.prototype.transform.position;
 		obstacle.transform.position = new Vector3(pos.x,pos.y,pos.z);
-		this.initObstacle(obstacle);
 		return obstacle;
 	}
 
-	private void initObstacle( GameObject obstacle )
-	{
-		ObstacleBehaviour fb = obstacle.GetComponent("ObstacleBehaviour") as ObstacleBehaviour;
-		fb.running = true;
-		//fb.speed = this._cameraSpeed;
-		fb.garbageCollectable = true;		
-	}
-
-	private void updateSpeed( GameObject obstacle )
-	{
-		ObstacleBehaviour fb = obstacle.GetComponent("ObstacleBehaviour") as ObstacleBehaviour;
-		fb.speed = this._cameraSpeed;
-	}
-	
 }
