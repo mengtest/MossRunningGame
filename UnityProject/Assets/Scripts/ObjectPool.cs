@@ -49,23 +49,6 @@ public class ObjectPool
 	
 	///////////////
 	
-	/// <summary>
-	/// Gets the list.
-	/// </summary>
-	/// <value>
-	/// The list.
-	/// </value>
-	public System.Collections.Generic.Queue<GameObject> list
-	{
-		get { return _queue;	}
-	}
-	
-	/// <summary>
-	/// Gets the max qty.
-	/// </summary>
-	/// <value>
-	/// The max qty.
-	/// </value>
 	public uint maxQty
 	{
 		get { return _maxQty;	}
@@ -77,4 +60,3 @@ public class ObjectPool
 	}
 	
 }
-

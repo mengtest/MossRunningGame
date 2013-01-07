@@ -4,31 +4,25 @@ using System.Collections.Generic;
 
 internal class ObstacleFactory
 {
-	private float _cameraSpeed = -0.15f;
-	
+
 	private Dictionary<string, ObjectPool> _objectPools;
 	
 	public ObstacleFactory()
 	{
 		_objectPools = new Dictionary<string, ObjectPool>();
-		_objectPools.Add("crate", 		new ObjectPool(GameObject.Find("ProtoCrate"),		3));
-		_objectPools.Add("coin",  		new ObjectPool(GameObject.Find("ProtoCoin"),		3));
+		_objectPools.Add("crate", 		new ObjectPool(GameObject.Find("ProtoCrate"),		4));
+		_objectPools.Add("coin",  		new ObjectPool(GameObject.Find("ProtoCoin"),		4));
 		_objectPools.Add("fence", 		new ObjectPool(GameObject.Find("ProtoFence"),		8));
 		_objectPools.Add("bush",  		new ObjectPool(GameObject.Find("ProtoBush"),		5));
 		_objectPools.Add("brickwall",	new ObjectPool(GameObject.Find("ProtoBrickWall"),	4));
 	}
 	
-	public GameObject createObstacle( string type )
+	public GameObject CreateObstacle( string type )
 	{
 		ObjectPool pool = _objectPools[type];
-		return GetObstacle (pool);			
-	}	
-	
-	public float getCameraSpeed()
-	{
-		return this._cameraSpeed;
+		return GetObstacle (pool);
 	}
-	
+
 	///////////////////////////////////////////////	
 	
 	private GameObject GetObstacle( ObjectPool pool )

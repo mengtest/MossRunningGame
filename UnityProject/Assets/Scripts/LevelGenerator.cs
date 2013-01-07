@@ -27,7 +27,6 @@ public class LevelGenerator
 		if(this.elapsed % 90 == 0 && this.elapsed > 0)
 		{
 			obstacle_type = "coin";
-
 		}
 		if(this.elapsed % 106 == 0 )
 		{
@@ -36,7 +35,8 @@ public class LevelGenerator
 
 		if(obstacle_type!="")
 		{
-			GameObject new_obstacle = this.factory.createObstacle( obstacle_type );
+			GameObject new_obstacle = this.factory.CreateObstacle( obstacle_type );
+			// adding "new" obstacle to treadmill
 			new_obstacle.transform.parent = this.treadmill.transform;
 		}
 
