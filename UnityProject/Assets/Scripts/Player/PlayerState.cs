@@ -74,7 +74,7 @@ internal class Running : PlayerState
 
 internal class Jumping : PlayerState
 {
-	private float jumpSpeed = 0.35f;
+	private float jumpSpeed = 0.20f;
 	private int elapsed = 0;
 
 	public Jumping( PlayerFSM fsm, PlayerBehaviour character ) : base( fsm, character )
@@ -98,6 +98,13 @@ internal class Jumping : PlayerState
 		if(this.IsOnGround())
 		{
 			this.fsm.GoRunning();
+		}
+		else
+		{
+			if(Input.anyKey && this.elapsed < 15)
+			{
+				this.character.velocity.y += this.jumpSpeed * 0.08f;
+			}
 		}
 		base.Update();
 	}
