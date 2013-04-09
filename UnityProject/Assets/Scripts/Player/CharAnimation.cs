@@ -47,12 +47,12 @@ public class CharAnimation
 		this.elapsed++;
 	}
 	
-	protected void SetPlayerYPos( float y )
+  /*protected void SetPlayerYPos( float y )
 	{
 		Vector3 pos = this.player.transform.localPosition;
 		pos.y = y;
 		this.player.transform.localPosition = pos;
-	}
+	}*/
 	
 	protected void SetHeadYPos( float y )
 	{
@@ -103,8 +103,8 @@ public class RunningAnimation : CharAnimation
 		this.SetJointAngle( legLeft,    sin * this.shoulderAmplitude );
 		this.SetJointAngle( legRight, - sin * this.shoulderAmplitude );
 		
-		float cos = Mathf.Cos( r * Mathf.PI * 2 * 2 );
-		this.SetPlayerYPos( cos * 0.1f );
+		//float cos = Mathf.Cos( r * Mathf.PI * 2 * 2 );
+		//this.SetPlayerYPos( cos * 0.1f );
 		
 		this.RotateHead( r );
 		//
@@ -116,6 +116,7 @@ public class RunningAnimation : CharAnimation
 		Vector3 angles = this.neck.localEulerAngles;
 		angles.x = Mathf.Sin ( r * Mathf.PI * 2 ) * this.neckAmplitude;
 		//angles.y = Mathf.Sin ( r * Mathf.PI * 1 ) * this.neckAmplitude;
+		angles.z = 0;
 		this.neck.localEulerAngles = angles;
 	}	
 	
@@ -123,12 +124,9 @@ public class RunningAnimation : CharAnimation
 
 public class JumpingAnimation : CharAnimation
 {
-	private int jumpDuration;
-	private float jumpHeight = 6.0f;
 	
-	public JumpingAnimation( GameObject player, int jumpDuration ) : base( player )
+	public JumpingAnimation( GameObject player ) : base( player )
 	{
-		this.jumpDuration = jumpDuration;
 	}
 	
 	public override void Start()
@@ -140,10 +138,8 @@ public class JumpingAnimation : CharAnimation
 	
 	public override void Update ()
 	{
-		float r = ((float)this.elapsed) / ((float)this.jumpDuration);
-		float py = Mathf.Abs( Mathf.Sin( r * Mathf.PI ) * this.jumpHeight );
-		this.SetPlayerYPos( py );
-		//
+		Vector3 pos = this.player.transform.position;
+		float r = ((float)pos.y) / 12.0f;
 		this.RotateHead( r );
 		//
 		base.Update ();
