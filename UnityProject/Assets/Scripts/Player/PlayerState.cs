@@ -83,6 +83,7 @@ internal class Jumping : PlayerState
 	{
 		this.elapsed ++;
 		//
+
 		if(this.elapsed>this.jumpDuration)
 		{
 			this.fsm.GoRunning();
