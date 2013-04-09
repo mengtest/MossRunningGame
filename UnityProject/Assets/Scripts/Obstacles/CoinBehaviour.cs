@@ -24,7 +24,7 @@ public class CoinBehaviour : MonoBehaviour {
 					this.gameObject.audio.Play();
 				}
 			}
-			this.gameObject.transform.Translate( new Vector3(0,0,-10) ); // hiding coin off screen			
+			this.gameObject.transform.Translate( new Vector3(0,0,-100) ); // hiding coin off screen			
 		}
 	}	
 }
