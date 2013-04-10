@@ -62,10 +62,16 @@ internal class Running : PlayerState
 	public override void Update()
 	{
 		//
-		bool k = Input.anyKey;
-		if(k)
+		bool up = Input.GetKeyDown(KeyCode.UpArrow);
+		bool dwn = Input.GetKeyDown(KeyCode.DownArrow);
+		//bool k = Input.anyKey;
+		if(up && !dwn)
 		{
 			this.fsm.GoJumping();
+		}
+		if(dwn && !up)
+		{
+			this.fsm.GoSliding();
 		}
 		//
 		base.Update();
@@ -74,12 +80,13 @@ internal class Running : PlayerState
 
 internal class Jumping : PlayerState
 {
-	private float jumpSpeed = 0.20f;
+	private float jumpSpeed = 0.16f;
 	private int elapsed = 0;
 
 	public Jumping( PlayerFSM fsm, PlayerBehaviour character ) : base( fsm, character )
 	{
 		this.animation = new JumpingAnimation( this.character.gameObject );
+		//this.animation = new SlidingAnimation( this.character.gameObject );
 	}	
 	
 	public override void Start()
@@ -124,4 +131,41 @@ internal class Jumping : PlayerState
 		return false;
 	}
 	
+}
+
+internal class Sliding : PlayerState
+{
+	private int elapsed = 0;
+	private int duration = 45;
+
+	public Sliding( PlayerFSM fsm, PlayerBehaviour character ) : base( fsm, character )
+	{
+		this.animation = new SlidingAnimation( this.character.gameObject );
+	}
+
+	public override void Start()
+	{
+		this.elapsed = 0;
+		base.Start();
+		this.character.velocity.y = 0;
+	}
+
+	public override void Update()
+	{
+		this.elapsed ++;
+		//
+		base.Update();
+		//
+		if(this.elapsed >= this.duration)
+		{
+			this.fsm.GoRunning();
+		}
+	}
+
+	public override void End()
+	{
+		this.elapsed = 0;
+	}
+
+
 }
