@@ -73,7 +73,6 @@ public class CharAnimation
 	protected void SetSlidingPose( float n )
 	{
 		float sliding_y_pos = -0.75f;
-		Debug.Log("SetSlidingPose: " + n);
 
 		Vector3 body_pos = this.body.transform.localPosition;
 		Vector3 pos = this.player.transform.position;

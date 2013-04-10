@@ -15,6 +15,8 @@ internal class ObstacleFactory
 		_objectPools.Add("fence", 		new ObjectPool(GameObject.Find("ProtoFence"),		8));
 		_objectPools.Add("bush",  		new ObjectPool(GameObject.Find("ProtoBush"),		5));
 		_objectPools.Add("brickwall",	new ObjectPool(GameObject.Find("ProtoBrickWall"),	4));
+		_objectPools.Add("wallsign",	new ObjectPool(GameObject.Find("ProtoWallSign"),	4));
+
 	}
 	
 	public GameObject CreateObstacle( string type )
