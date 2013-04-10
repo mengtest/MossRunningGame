@@ -25,23 +25,28 @@ public class LevelGenerator
 
 		if(this.elapsed % 120 == 0 && this.elapsed > 240)
 		{
-			pendingObstacles.Enqueue("crate");
-			//obstacle_type = "crate";
+			System.Random rnd = new System.Random();
+			int rnd_number = rnd.Next(0,2);
+
+			Debug.Log("rnd_number:"+rnd_number);
+
+			if(rnd_number<1)
+			{
+				pendingObstacles.Enqueue("crate");
+			}
+			else
+			{
+				pendingObstacles.Enqueue("wallsign");
+			}
 		}
+
 		if(this.elapsed % 90 == 0 && this.elapsed > 0)
 		{
 			pendingObstacles.Enqueue("coin");
-			//obstacle_type = "coin";
 		}
 		if(this.elapsed % 106 == 0 )
 		{
 			pendingObstacles.Enqueue("brickwall");
-			//obstacle_type = "brickwall";
-		}
-		if(this.elapsed % 270 == 0 )
-		{
-			pendingObstacles.Enqueue("wallsign");
-			//obstacle_type = "wallsign";
 		}
 
 		while(pendingObstacles.Count>0)

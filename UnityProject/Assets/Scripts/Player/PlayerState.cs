@@ -80,7 +80,7 @@ internal class Running : PlayerState
 
 internal class Jumping : PlayerState
 {
-	private float jumpSpeed = 0.20f;
+	private float jumpSpeed = 0.16f;
 	private int elapsed = 0;
 
 	public Jumping( PlayerFSM fsm, PlayerBehaviour character ) : base( fsm, character )
