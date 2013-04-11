@@ -58,7 +58,10 @@
      <Compile Include="Assets\Scripts\Player\CharAnimation.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerBehaviour.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerFSM.cs" />
-     <Compile Include="Assets\Scripts\Player\PlayerState.cs" />
+     <Compile Include="Assets\Scripts\Player\States\Jumping.cs" />
+     <Compile Include="Assets\Scripts\Player\States\PlayerState.cs" />
+     <Compile Include="Assets\Scripts\Player\States\Running.cs" />
+     <Compile Include="Assets\Scripts\Player\States\Sliding.cs" />
      <Compile Include="Assets\Scripts\Session\SessionState.cs" />
      <None Include="Assets\Standard Assets\Projectors\Blob-Shadow\ShadowProjection.shader" />
      <None Include="Assets\Shaders\PlainColor.shader" />
