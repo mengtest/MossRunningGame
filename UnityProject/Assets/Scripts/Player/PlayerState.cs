@@ -1,6 +1,5 @@
 // Multiple clases in this file.
 // PlayerState and some sub-classes: Running and Jumping, for now.
-
 using UnityEngine;
 using System.Collections;
 
@@ -8,36 +7,41 @@ public class PlayerState
 {
 	protected PlayerFSM fsm;
 	protected PlayerBehaviour character;
-
 	protected CharAnimation animation; // It's probably best to use Blender animations instead of this, but I haven't got the time to learn to animate in Blender yet.
 	
-	public PlayerState( PlayerFSM fsm, PlayerBehaviour character )
+	public PlayerState (PlayerFSM fsm, PlayerBehaviour character)
 	{
 		this.fsm = fsm;
 		this.character = character;
 	}
-	public virtual void Start()
+
+	public virtual void Start ()
 	{
-		if(this.animation!=null) this.animation.Start();
+		if (this.animation != null)
+			this.animation.Start ();
 	}
-	public virtual void Update()
+
+	public virtual void Update ()
 	{
-		if(this.animation!=null) this.animation.Update();
+		if (this.animation != null)
+			this.animation.Update ();
 		//
 		Vector3 pos = this.character.transform.localPosition;
 		
 		float center = -5.0f;
 		float pos_x = pos.x;
-		if(pos_x<center) pos_x += 0.005f * (center - pos_x);
+		if (pos_x < center)
+			pos_x += 0.005f * (center - pos_x);
 		float pos_y = pos.y + this.character.velocity.y;
 
-		this.SetCharacterPos(pos_x, pos_y, 0);
+		this.SetCharacterPos (pos_x, pos_y, 0);
 	}
-	public virtual void End()
+
+	public virtual void End ()
 	{
-	}	
+	}
 	
-	protected void SetCharacterPos( float x, float y, float z )
+	protected void SetCharacterPos (float x, float y, float z)
 	{
 		Vector3 pos = this.character.gameObject.transform.position;
 		pos.x = x;
@@ -49,32 +53,31 @@ public class PlayerState
 
 internal class Running : PlayerState
 {
-	public Running( PlayerFSM fsm, PlayerBehaviour character ) : base( fsm, character )
+	public Running (PlayerFSM fsm, PlayerBehaviour character) : base( fsm, character )
 	{
-		this.animation = new RunningAnimation( character.gameObject ); 		
-	}	
+		this.animation = new RunningAnimation (character.gameObject); 		
+	}
 	
-	public override void Start()
+	public override void Start ()
 	{
-		base.Start();
+		base.Start ();
 		this.character.velocity.y = 0;
 	}
-	public override void Update()
+
+	public override void Update ()
 	{
 		//
-		bool up = Input.GetKeyDown(KeyCode.UpArrow);
-		bool dwn = Input.GetKeyDown(KeyCode.DownArrow);
+		bool up = Input.GetKeyDown (KeyCode.UpArrow);
+		bool dwn = Input.GetKeyDown (KeyCode.DownArrow);
 		//bool k = Input.anyKey;
-		if(up && !dwn)
-		{
-			this.fsm.GoJumping();
+		if (up && !dwn) {
+			this.fsm.GoJumping ();
 		}
-		if(dwn && !up)
-		{
-			this.fsm.GoSliding();
+		if (dwn && !up) {
+			this.fsm.GoSliding ();
 		}
 		//
-		base.Update();
+		base.Update ();
 	}
 }
 
@@ -83,47 +86,45 @@ internal class Jumping : PlayerState
 	private float jumpSpeed = 0.16f;
 	private int elapsed = 0;
 
-	public Jumping( PlayerFSM fsm, PlayerBehaviour character ) : base( fsm, character )
+	public Jumping (PlayerFSM fsm, PlayerBehaviour character) : base( fsm, character )
 	{
-		this.animation = new JumpingAnimation( this.character.gameObject );
+		this.animation = new JumpingAnimation (this.character.gameObject);
 		//this.animation = new SlidingAnimation( this.character.gameObject );
-	}	
+	}
 	
-	public override void Start()
+	public override void Start ()
 	{
 		this.elapsed = 0;
-		base.Start();
+		base.Start ();
 		this.character.velocity.y = this.jumpSpeed;
 	}
-	public override void Update()
+
+	public override void Update ()
 	{
 		this.elapsed ++;
 		//
 		this.character.velocity.y += this.character.gravity.y;
 		this.character.velocity.x += this.character.gravity.x;
 
-		if(this.IsOnGround())
-		{
-			this.fsm.GoRunning();
-		}
-		else
-		{
-			if(Input.anyKey && this.elapsed < 15)
-			{
+		if (this.IsOnGround ()) {
+			this.fsm.GoRunning ();
+		} else {
+			if (Input.anyKey && this.elapsed < 15) {
 				this.character.velocity.y += this.jumpSpeed * 0.08f;
 			}
 		}
-		base.Update();
+		base.Update ();
 	}
-	public override void End()
+
+	public override void End ()
 	{
 		this.elapsed = 0;
 	}
-	public bool IsOnGround()
+
+	public bool IsOnGround ()
 	{
 		Vector3 pos = this.character.gameObject.transform.position;
-		if(pos.y<0)
-		{
+		if (pos.y < 0) {
 			pos.y = 0;
 			this.character.gameObject.transform.position = pos;
 			return true;
@@ -138,31 +139,30 @@ internal class Sliding : PlayerState
 	private int elapsed = 0;
 	private int duration = 45;
 
-	public Sliding( PlayerFSM fsm, PlayerBehaviour character ) : base( fsm, character )
+	public Sliding (PlayerFSM fsm, PlayerBehaviour character) : base( fsm, character )
 	{
-		this.animation = new SlidingAnimation( this.character.gameObject );
+		this.animation = new SlidingAnimation (this.character.gameObject);
 	}
 
-	public override void Start()
+	public override void Start ()
 	{
 		this.elapsed = 0;
-		base.Start();
+		base.Start ();
 		this.character.velocity.y = 0;
 	}
 
-	public override void Update()
+	public override void Update ()
 	{
 		this.elapsed ++;
 		//
-		base.Update();
+		base.Update ();
 		//
-		if(this.elapsed >= this.duration)
-		{
-			this.fsm.GoRunning();
+		if (this.elapsed >= this.duration) {
+			this.fsm.GoRunning ();
 		}
 	}
 
-	public override void End()
+	public override void End ()
 	{
 		this.elapsed = 0;
 	}

@@ -1,7 +1,5 @@
 // Multiple clases in this file.
 // CharAnimation and some sub-classes: RunningAnimation and JumpingAnimation, for now.
-
-
 using UnityEngine;
 using System.Collections;
 
@@ -11,24 +9,21 @@ using System.Collections;
 public class CharAnimation
 {
 	protected GameObject player;
-	
-	protected Transform shoulderLeft; 
-	protected Transform shoulderRight; 
+	protected Transform shoulderLeft;
+	protected Transform shoulderRight;
 	protected Transform legLeft;
 	protected Transform legRight;
-	protected Transform neck;	
+	protected Transform neck;
 	protected Transform head;
 	protected Transform body;
-	
 	protected float head_origin_z;
-	
 	protected int elapsed = 0;
 	
-	public CharAnimation( GameObject player )
+	public CharAnimation (GameObject player)
 	{
 		this.player = player;
-		this.shoulderLeft = this.player.transform.Find("Body/Shoulder-Left");
-		this.shoulderRight = this.player.transform.Find("Body/Shoulder-Right");
+		this.shoulderLeft = this.player.transform.Find ("Body/Shoulder-Left");
+		this.shoulderRight = this.player.transform.Find ("Body/Shoulder-Right");
 		this.legLeft = this.player.transform.Find ("Body/Crotch-Left");
 		this.legRight = this.player.transform.Find ("Body/Crotch-Right");
 		this.neck = this.player.transform.Find ("Neck");
@@ -49,28 +44,28 @@ public class CharAnimation
 		this.elapsed++;
 	}
 	
-  /*protected void SetPlayerYPos( float y )
+	/*protected void SetPlayerYPos( float y )
 	{
 		Vector3 pos = this.player.transform.localPosition;
 		pos.y = y;
 		this.player.transform.localPosition = pos;
 	}*/
 
-	protected void RotateHead( float r )
+	protected void RotateHead (float r)
 	{
 		Vector3 angles = this.neck.localEulerAngles;
-		angles.z = Mathf.Sin ( r * Mathf.PI  ) * 45;
+		angles.z = Mathf.Sin (r * Mathf.PI) * 45;
 		this.neck.localEulerAngles = angles;
 	}
 
-	protected void SetHeadYPos( float y )
+	protected void SetHeadYPos (float y)
 	{
 		Vector3 pos = this.head.localPosition;
 		pos.z = y;
 		this.head.localPosition = pos;
 	}
 
-	protected void SetSlidingPose( float n )
+	protected void SetSlidingPose (float n)
 	{
 		float sliding_y_pos = -0.75f;
 
@@ -80,7 +75,7 @@ public class CharAnimation
 		float head_rotation_ratio = 0.5f;
 
 		body_pos.x = -0.75f;
-		body_pos.z =  0.50f;
+		body_pos.z = 0.50f;
 
 		pos.y = sliding_y_pos;
 
@@ -89,8 +84,7 @@ public class CharAnimation
 
 		float m = 0;
 
-		if(n<=0.25f)
-		{
+		if (n <= 0.25f) {
 			m = 4 * n;
 			body_angle = m * 90.0f;
 			pos.y = m * sliding_y_pos;
@@ -99,9 +93,8 @@ public class CharAnimation
 			body_pos.z = m * body_pos.z;
 			head_rotation_ratio = m * head_rotation_ratio;
 		}
-		if(n>=0.875f)
-		{
-			m = 8 * (1-n);
+		if (n >= 0.875f) {
+			m = 8 * (1 - n);
 			body_angle = m * 90.0f;
 			pos.y = m * sliding_y_pos;
 			neck_angle = m * 45;
@@ -112,13 +105,13 @@ public class CharAnimation
 		this.player.transform.position = pos;
 		body_pos.z = body_pos.z + 1;
 		this.body.transform.localPosition = body_pos;
-		this.SetJointAngle( this.body, body_angle );
-		this.SetJointAngle( this.neck, neck_angle );
-		this.RotateHead( head_rotation_ratio );
+		this.SetJointAngle (this.body, body_angle);
+		this.SetJointAngle (this.neck, neck_angle);
+		this.RotateHead (head_rotation_ratio);
 
 	}
 	
-	protected void SetJointAngle( Transform tr, float angle )
+	protected void SetJointAngle (Transform tr, float angle)
 	{
 		Vector3 angles = tr.localEulerAngles;
 		angles.y = angle;
@@ -134,17 +127,17 @@ public class RunningAnimation : CharAnimation
 	private float shoulderAmplitude = 80; // degrees
 	private float neckAmplitude = 2.5f; // degrees
 	
-	public RunningAnimation( GameObject player ) : base( player )
+	public RunningAnimation (GameObject player) : base( player )
 	{
 	}
 	
-	public override void Start()
+	public override void Start ()
 	{
-		this.SetSlidingPose(0);
+		this.SetSlidingPose (0);
 
-		this.player.transform.localEulerAngles = new Vector3(275,90,90); // lean character forward a little bit
+		this.player.transform.localEulerAngles = new Vector3 (275, 90, 90); // lean character forward a little bit
 		
-		this.SetHeadYPos( this.head_origin_z );
+		this.SetHeadYPos (this.head_origin_z);
 		//
 		Vector3 neck_angles = this.neck.localEulerAngles;
 		neck_angles.x = 0;
@@ -152,33 +145,33 @@ public class RunningAnimation : CharAnimation
 		neck_angles.z = 0;
 		this.neck.localEulerAngles = neck_angles;
 		//
-		base.Start();
+		base.Start ();
 	}
 	
-	public override void Update()
+	public override void Update ()
 	{
 		float r = (float)this.elapsed / shoulderCycle;
 		
-		float sin = Mathf.Sin ( r * Mathf.PI * 2);
+		float sin = Mathf.Sin (r * Mathf.PI * 2);
 		
-		this.SetJointAngle( shoulderLeft,    sin * this.shoulderAmplitude );
-		this.SetJointAngle( shoulderRight, - sin * this.shoulderAmplitude );
+		this.SetJointAngle (shoulderLeft, sin * this.shoulderAmplitude);
+		this.SetJointAngle (shoulderRight, - sin * this.shoulderAmplitude);
 		
-		this.SetJointAngle( legLeft,    sin * this.shoulderAmplitude );
-		this.SetJointAngle( legRight, - sin * this.shoulderAmplitude );
+		this.SetJointAngle (legLeft, sin * this.shoulderAmplitude);
+		this.SetJointAngle (legRight, - sin * this.shoulderAmplitude);
 		
 		//float cos = Mathf.Cos( r * Mathf.PI * 2 * 2 );
 		//this.SetPlayerYPos( cos * 0.1f );
 		
-		this.SwingHead( r );
+		this.SwingHead (r);
 		//
-		base.Update();
+		base.Update ();
 	}
 
-	private void SwingHead( float r )
+	private void SwingHead (float r)
 	{
 		Vector3 angles = this.neck.localEulerAngles;
-		angles.x = Mathf.Sin ( r * Mathf.PI * 2 ) * this.neckAmplitude;
+		angles.x = Mathf.Sin (r * Mathf.PI * 2) * this.neckAmplitude;
 		//angles.y = Mathf.Sin ( r * Mathf.PI * 1 ) * this.neckAmplitude;
 		angles.z = 0;
 		this.neck.localEulerAngles = angles;
@@ -189,23 +182,23 @@ public class RunningAnimation : CharAnimation
 public class JumpingAnimation : CharAnimation
 {
 	
-	public JumpingAnimation( GameObject player ) : base( player )
+	public JumpingAnimation (GameObject player) : base( player )
 	{
 	}
 	
-	public override void Start()
+	public override void Start ()
 	{
-		this.SetSlidingPose(0);
-		this.player.transform.localEulerAngles = new Vector3(275,90,90); // lean character forward a little bit
-		base.Start();
-		this.player.audio.Play();
+		this.SetSlidingPose (0);
+		this.player.transform.localEulerAngles = new Vector3 (275, 90, 90); // lean character forward a little bit
+		base.Start ();
+		this.player.audio.Play ();
 	}
 	
 	public override void Update ()
 	{
 		Vector3 pos = this.player.transform.position;
 		float r = ((float)pos.y) / 12.0f;
-		this.RotateHead( r );
+		this.RotateHead (r);
 		//
 		base.Update ();
 	}
@@ -216,20 +209,21 @@ public class SlidingAnimation : CharAnimation
 {
 	private int duration = 45;
 
-	public SlidingAnimation( GameObject player ) : base( player )
+	public SlidingAnimation (GameObject player) : base( player )
 	{
 	}
 
-	public override void Start()
+	public override void Start ()
 	{
-		base.Start();
+		base.Start ();
 	}
-	public override void Update()
+
+	public override void Update ()
 	{
-		float n = ((float)this.elapsed/(float)this.duration);
-		n = Mathf.Min (1,n);
-		this.SetSlidingPose(n);
-		base.Update();
+		float n = ((float)this.elapsed / (float)this.duration);
+		n = Mathf.Min (1, n);
+		this.SetSlidingPose (n);
+		base.Update ();
 	}
 
 }
