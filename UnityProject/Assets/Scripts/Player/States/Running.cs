@@ -12,6 +12,12 @@ public class Running : PlayerState
 	{
 		base.Start ();
 		this.character.velocity.y = 0;
+		//
+		Vector3 pos = this.character.gameObject.transform.position;
+		if (pos.y < 0) {
+			pos.y = 0;
+			this.character.gameObject.transform.position = pos;
+		}
 	}
 
 	public override void Update ()

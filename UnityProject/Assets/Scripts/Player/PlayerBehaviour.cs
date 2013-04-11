@@ -17,8 +17,10 @@ public class PlayerBehaviour : MonoBehaviour
 	void Start ()
 	{
 		this.totalCoins = 0;
+		
 		this.velocity = new Vector2 (0, 0);
 		this.gravity = new Vector2 (0, -0.01f);
+
 		this.fsm = new PlayerFSM (this);
 		this.fsm.start ();
 	}

@@ -5,6 +5,8 @@ public class Jumping : PlayerState
 {
 	private float jumpSpeed = 0.16f;
 	private int elapsed = 0;
+	private float impulseLimit = 15f;
+	private float extraImpulse = 0.08f;
 
 	public Jumping (PlayerFSM fsm, PlayerBehaviour character) : base( fsm, character )
 	{
@@ -29,8 +31,8 @@ public class Jumping : PlayerState
 		if (this.IsOnGround ()) {
 			this.fsm.GoRunning ();
 		} else {
-			if (Input.anyKey && this.elapsed < 15) {
-				this.character.velocity.y += this.jumpSpeed * 0.08f;
+			if (Input.anyKey && this.elapsed < this.impulseLimit) {
+				this.character.velocity.y += this.jumpSpeed * this.extraImpulse;
 			}
 		}
 		base.Update ();
@@ -44,12 +46,7 @@ public class Jumping : PlayerState
 	public bool IsOnGround ()
 	{
 		Vector3 pos = this.character.gameObject.transform.position;
-		if (pos.y < 0) {
-			pos.y = 0;
-			this.character.gameObject.transform.position = pos;
-			return true;
-		}
-		return false;
+		return (pos.y < 0);
 	}
 	
 }
