@@ -30,33 +30,33 @@ public class LevelGenerator
 			if (this.elapsed % interval == 0) {
 				pendingObstacles.Enqueue (new ObstacleRequest ("brickwall", 0, 0));
 
-				if (this.rnd.Next (0, 5) < 1) {
+				if (this.Chance (0.2f)) {
 					pendingObstacles.Enqueue (new ObstacleRequest ("floorgap01", 0, 0));
 
-					//if (this.rnd.Next (0, 3) < 1) {
-					pendingObstacles.Enqueue (new ObstacleRequest ("coin", 8, 0));
-					//}
+					if (this.Chance (0.5f)) {
+						pendingObstacles.Enqueue (new ObstacleRequest ("coin", 8, 0));
+					}
 
 				} else {
 					pendingObstacles.Enqueue (new ObstacleRequest ("floortype01", 0, 0));
 
 					// more stuff here
 
-					if (this.rnd.Next (0, 3) < 1) {
-						if (this.rnd.Next (0, 2) < 1) {
+					if (this.Chance (0.33f)) {
+						if (this.Chance (0.5f)) {
 							pendingObstacles.Enqueue (new ObstacleRequest ("crate", 0, 0));
-							if (this.rnd.Next (0, 2) < 1) {
+							if (this.Chance (0.5f)) {
 								pendingObstacles.Enqueue (new ObstacleRequest ("crate", 8, 0));
 							}
 						} else {
 							pendingObstacles.Enqueue (new ObstacleRequest ("wallsign", 0, 0));
-							if (this.rnd.Next (0, 2) < 1) {
+							if (this.Chance (0.5f)) {
 								pendingObstacles.Enqueue (new ObstacleRequest ("wallsign", 8, 0));
 							}
 						}
 					} else {
 						pendingObstacles.Enqueue (new ObstacleRequest ("coin", 0, 0));
-						if (this.rnd.Next (0, 2) < 1) {
+						if (this.Chance (0.5f)) {
 							pendingObstacles.Enqueue (new ObstacleRequest ("coin", 8, 0));
 						}
 					}
@@ -74,6 +74,11 @@ public class LevelGenerator
 		}
 
 		this.elapsed++;
+	}
+
+	private bool Chance (float ch)
+	{
+		return ((this.rnd.Next (0, 1000000) / 1000000f) < ch);
 	}
 	
 }

@@ -49,7 +49,7 @@ public class Game : MonoBehaviour {
 
 	void CheckGameOver ()
 	{
-		if(this.player.transform.localPosition.x<-15)
+		if(this.player.transform.position.x<-15)
 		{
 			this.gameRunning = false;
 			Debug.Log ("Game Over");
