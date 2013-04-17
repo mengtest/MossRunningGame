@@ -8,6 +8,7 @@ public class PlayerFSM
 	private PlayerState jumpingState;
 	private PlayerState runningState;
 	private PlayerState slidingState;
+	private PlayerState fallingState;
 	
 	public PlayerFSM (PlayerBehaviour character)
 	{
@@ -19,6 +20,7 @@ public class PlayerFSM
 		this.runningState = new Running (this, this.character);
 		this.jumpingState = new Jumping (this, this.character);
 		this.slidingState = new Sliding (this, this.character);
+		this.fallingState = new Falling (this, this.character);
 		this.GoRunning ();
 	}
 	
@@ -40,6 +42,11 @@ public class PlayerFSM
 	internal void GoSliding ()
 	{
 		this.SetState (this.slidingState);
+	}
+
+	internal void GoFalling()
+	{
+		this.SetState (this.fallingState);
 	}
 	
 	private void SetState (PlayerState new_state)

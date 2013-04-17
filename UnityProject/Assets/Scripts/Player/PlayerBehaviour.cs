@@ -39,6 +39,9 @@ public class PlayerBehaviour : MonoBehaviour
 			this.totalCoins++;
 			this.coinCollected (this.totalCoins);
 		}
+		if (other.gameObject.tag == "floorgap") {
+			this.fsm.GoFalling ();
+		}
 	}
 
 }

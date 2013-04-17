@@ -25,12 +25,16 @@ public class Running : PlayerState
 		//
 		bool up = Input.GetKeyDown (KeyCode.UpArrow);
 		bool dwn = Input.GetKeyDown (KeyCode.DownArrow);
+		bool spc = Input.GetKeyDown (KeyCode.Space);
 		//bool k = Input.anyKey;
 		if (up && !dwn) {
 			this.fsm.GoJumping ();
 		}
 		if (dwn && !up) {
 			this.fsm.GoSliding ();
+		}
+		if (spc) {
+			this.fsm.GoFalling ();
 		}
 		//
 		base.Update ();
