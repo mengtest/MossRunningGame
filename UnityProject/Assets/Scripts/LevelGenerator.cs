@@ -8,14 +8,15 @@ public class LevelGenerator
 {
 	private int elapsed = 0;
 	private ObstacleFactory factory;
-	private GameObject treadmill;
+	private TreadmillBehaviour treadmill;
 	private System.Random rnd;
 	private Queue	pendingObstacles;
 
-	public LevelGenerator (GameObject treadmill)
+	public LevelGenerator (TreadmillBehaviour treadmill)
 	{
 		this.factory = new ObstacleFactory ();
 		this.treadmill = treadmill;
+
 		this.pendingObstacles = new Queue ();
 
 		this.rnd = new System.Random ();
@@ -25,31 +26,37 @@ public class LevelGenerator
 	{
 		string obstacle_type = "";
 
-		if (this.elapsed % 106 == 0) {
-			pendingObstacles.Enqueue ("brickwall");
+		if (true) {
+			uint interval = (uint)(-16.0f / this.treadmill.speed);
 
-			if (this.rnd.Next (0, 20) < 1) {
-				pendingObstacles.Enqueue ("floorgap01");
+			Debug.Log ("interval:" + interval);
 
-				if (this.rnd.Next (0, 3) < 1) {
-					pendingObstacles.Enqueue ("coin");
-				}
+			if (this.elapsed % interval == 0) {
+				pendingObstacles.Enqueue ("brickwall");
 
-			} else {
-				pendingObstacles.Enqueue ("floortype01");
+				if (this.rnd.Next (0, 20) < 1) {
+					pendingObstacles.Enqueue ("floorgap01");
 
-				// more stuff here
-
-				if (this.rnd.Next (0, 3) < 1) {
-					if (this.rnd.Next (0, 2) < 1) {
-						pendingObstacles.Enqueue ("crate");
-					} else {
-						pendingObstacles.Enqueue ("wallsign");
+					if (this.rnd.Next (0, 3) < 1) {
+						pendingObstacles.Enqueue ("coin");
 					}
-				} else {
-					pendingObstacles.Enqueue ("coin");
-				}
 
+				} else {
+					pendingObstacles.Enqueue ("floortype01");
+
+					// more stuff here
+
+					if (this.rnd.Next (0, 3) < 1) {
+						if (this.rnd.Next (0, 2) < 1) {
+							pendingObstacles.Enqueue ("crate");
+						} else {
+							pendingObstacles.Enqueue ("wallsign");
+						}
+					} else {
+						pendingObstacles.Enqueue ("coin");
+					}
+
+				}
 			}
 		}
 
@@ -57,16 +64,8 @@ public class LevelGenerator
 			obstacle_type = (string)pendingObstacles.Dequeue ();
 			GameObject new_obstacle = this.factory.CreateObstacle (obstacle_type);
 			// adding "new" obstacle to treadmill
-			new_obstacle.transform.parent = this.treadmill.transform;
+			new_obstacle.transform.parent = this.treadmill.gameObject.transform;
 		}
-
-		/*
-		if(obstacle_type!="")
-		{
-			GameObject new_obstacle = this.factory.CreateObstacle( obstacle_type );
-			// adding "new" obstacle to treadmill
-			new_obstacle.transform.parent = this.treadmill.transform;
-		}*/
 
 		this.elapsed++;
 	}

@@ -18,7 +18,7 @@ public class Game : MonoBehaviour {
 		GameObject treadmill = GameObject.Find ("Treadmill");
 		this.treadmillBehaviour = (TreadmillBehaviour)treadmill.GetComponent("TreadmillBehaviour");
 
-		this.levelGenerator = new LevelGenerator( treadmill );
+		this.levelGenerator = new LevelGenerator( this.treadmillBehaviour );
 		this.gameRunning = true;
 
 		// Score TextMesh
