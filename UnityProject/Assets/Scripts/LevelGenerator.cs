@@ -24,36 +24,41 @@ public class LevelGenerator
 	
 	public void Update ()
 	{
-		string obstacle_type = "";
-
 		if (true) {
 			uint interval = (uint)(-16.0f / this.treadmill.speed);
 
-			Debug.Log ("interval:" + interval);
-
 			if (this.elapsed % interval == 0) {
-				pendingObstacles.Enqueue ("brickwall");
+				pendingObstacles.Enqueue (new ObstacleRequest ("brickwall", 0, 0));
 
 				if (this.rnd.Next (0, 20) < 1) {
-					pendingObstacles.Enqueue ("floorgap01");
+					pendingObstacles.Enqueue (new ObstacleRequest ("floorgap01", 0, 0));
 
-					if (this.rnd.Next (0, 3) < 1) {
-						pendingObstacles.Enqueue ("coin");
-					}
+					//if (this.rnd.Next (0, 3) < 1) {
+					pendingObstacles.Enqueue (new ObstacleRequest ("coin", 8, 0));
+					//}
 
 				} else {
-					pendingObstacles.Enqueue ("floortype01");
+					pendingObstacles.Enqueue (new ObstacleRequest ("floortype01", 0, 0));
 
 					// more stuff here
 
 					if (this.rnd.Next (0, 3) < 1) {
 						if (this.rnd.Next (0, 2) < 1) {
-							pendingObstacles.Enqueue ("crate");
+							pendingObstacles.Enqueue (new ObstacleRequest ("crate", 0, 0));
+							if (this.rnd.Next (0, 2) < 1) {
+								pendingObstacles.Enqueue (new ObstacleRequest ("crate", 8, 0));
+							}
 						} else {
-							pendingObstacles.Enqueue ("wallsign");
+							pendingObstacles.Enqueue (new ObstacleRequest ("wallsign", 0, 0));
+							if (this.rnd.Next (0, 2) < 1) {
+								pendingObstacles.Enqueue (new ObstacleRequest ("wallsign", 8, 0));
+							}
 						}
 					} else {
-						pendingObstacles.Enqueue ("coin");
+						pendingObstacles.Enqueue (new ObstacleRequest ("coin", 0, 0));
+						if (this.rnd.Next (0, 2) < 1) {
+							pendingObstacles.Enqueue (new ObstacleRequest ("coin", 8, 0));
+						}
 					}
 
 				}
@@ -61,8 +66,9 @@ public class LevelGenerator
 		}
 
 		while (pendingObstacles.Count>0) {
-			obstacle_type = (string)pendingObstacles.Dequeue ();
-			GameObject new_obstacle = this.factory.CreateObstacle (obstacle_type);
+			ObstacleRequest req = (ObstacleRequest)pendingObstacles.Dequeue ();
+			GameObject new_obstacle = this.factory.CreateObstacle (req.type);
+			new_obstacle.transform.Translate (req.xOffset, req.yOffset, 0);
 			// adding "new" obstacle to treadmill
 			new_obstacle.transform.parent = this.treadmill.gameObject.transform;
 		}
@@ -70,4 +76,18 @@ public class LevelGenerator
 		this.elapsed++;
 	}
 	
+}
+
+class ObstacleRequest
+{
+	public string type;
+	public float xOffset;
+	public float yOffset;
+
+	public ObstacleRequest (string type, float xOffset, float yOffset)
+	{
+		this.type = type;
+		this.xOffset = xOffset;
+		this.yOffset = yOffset;
+	}
 }
