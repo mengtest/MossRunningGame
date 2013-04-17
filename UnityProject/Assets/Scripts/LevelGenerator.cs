@@ -60,7 +60,6 @@ public class LevelGenerator
 							pendingObstacles.Enqueue (new ObstacleRequest ("coin", 8, 0));
 						}
 					}
-
 				}
 			}
 		}
