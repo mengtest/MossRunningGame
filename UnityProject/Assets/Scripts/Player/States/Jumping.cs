@@ -32,6 +32,7 @@ public class Jumping : PlayerState
 			this.fsm.GoRunning ();
 		} else {
 			if (Input.anyKey && this.elapsed < this.impulseLimit) {
+			//if (Input.anyKey) { jetpack!
 				this.character.velocity.y += this.jumpSpeed * this.extraImpulse;
 			}
 		}
