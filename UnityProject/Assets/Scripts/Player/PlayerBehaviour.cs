@@ -29,6 +29,11 @@ public class PlayerBehaviour : MonoBehaviour
 	{
 		this.fsm.Update ();
 	}
+
+	public void KillPlayer()
+	{
+		Application.LoadLevel("Menu");
+	}
 	
 	void OnTriggerEnter (Collider other)
 	{

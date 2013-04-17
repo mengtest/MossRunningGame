@@ -39,10 +39,11 @@ public class LevelGenerator
 		if (this.elapsed % 106 == 0) {
 			pendingObstacles.Enqueue ("brickwall");
 
-			if (this.rnd.Next (0, 6) < 1) {
-				pendingObstacles.Enqueue ("floortype01");
-			} else {
+			if (this.rnd.Next (0, 20) < 1) {
 				pendingObstacles.Enqueue ("floorgap01");
+			} else {
+				pendingObstacles.Enqueue ("floortype01");
+
 			}
 		}
 

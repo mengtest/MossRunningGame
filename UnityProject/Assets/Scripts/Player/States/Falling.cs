@@ -29,6 +29,7 @@ public class Falling : PlayerState
 		//
 		if (this.elapsed >= this.duration) {
 			// end game!!!
+			this.character.KillPlayer ();
 		}
 	}
 

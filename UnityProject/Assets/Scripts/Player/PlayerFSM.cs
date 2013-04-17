@@ -44,7 +44,7 @@ public class PlayerFSM
 		this.SetState (this.slidingState);
 	}
 
-	internal void GoFalling()
+	internal void GoFalling ()
 	{
 		this.SetState (this.fallingState);
 	}
