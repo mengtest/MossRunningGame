@@ -36,17 +36,27 @@ public class PlayerState
 	{
 		Vector3 pos = this.character.transform.localPosition;
 		//
-		// Speed up character if it's near the left edge of the screen.
-		float center = -5.0f;
-		if (pos.x < center)
-			this.character.velocity.x = 0.005f * (center - pos.x);
-		else
-			this.character.velocity.x = 0.000f;
-		//
+		this.AdjustHorizontalSpeed ();
 		pos.x = pos.x + this.character.velocity.x;
 		pos.y = pos.y + this.character.velocity.y;
 		pos.z = 0;
 
-		this.character.gameObject.transform.position = pos;
+		this.character.gameObject.transform.localPosition = pos;
+	}
+
+	protected virtual void AdjustHorizontalSpeed ()
+	{
+		// Speed up character if it's near the left edge of the screen.
+		TreadmillBehaviour treadmill = this.character.GetTreadmill ();
+		if(!treadmill)
+			return;
+		//
+		Vector3 pos = this.character.transform.position;
+		float center = -5.0f;
+		if (pos.x < center) {
+			this.character.velocity.x = -treadmill.speed + 0.005f * (center - pos.x);
+		} else {
+			this.character.velocity.x = -treadmill.speed;
+		}
 	}
 }

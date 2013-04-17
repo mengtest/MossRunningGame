@@ -38,4 +38,8 @@ public class Falling : PlayerState
 		this.elapsed = 0;
 	}
 
+	protected override void AdjustHorizontalSpeed()
+	{
+	}
+
 }

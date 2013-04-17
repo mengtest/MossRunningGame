@@ -15,8 +15,7 @@ public class Game : MonoBehaviour {
 	{
 		this.player = GameObject.FindGameObjectWithTag("Player");
 
-		GameObject treadmill = GameObject.Find ("Treadmill");
-		this.treadmillBehaviour = (TreadmillBehaviour)treadmill.GetComponent("TreadmillBehaviour");
+		this.treadmillBehaviour = (TreadmillBehaviour)GameObject.Find ("Treadmill").GetComponent("TreadmillBehaviour");
 
 		this.levelGenerator = new LevelGenerator( this.treadmillBehaviour );
 		this.gameRunning = true;
@@ -28,6 +27,7 @@ public class Game : MonoBehaviour {
 		// Listen for coin collection event
 		this.playerBehaviour = this.player.GetComponent("PlayerBehaviour") as PlayerBehaviour;
 		this.playerBehaviour.coinCollected += new PlayerBehaviour.CoinCollectedHandler( HandleCoinsCollected );
+		this.playerBehaviour.SetTreadmill(this.treadmillBehaviour);
 	}
 	
 	void Update ()

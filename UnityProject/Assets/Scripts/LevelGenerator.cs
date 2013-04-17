@@ -30,7 +30,7 @@ public class LevelGenerator
 			if (this.elapsed % interval == 0) {
 				pendingObstacles.Enqueue (new ObstacleRequest ("brickwall", 0, 0));
 
-				if (this.rnd.Next (0, 20) < 1) {
+				if (this.rnd.Next (0, 5) < 1) {
 					pendingObstacles.Enqueue (new ObstacleRequest ("floorgap01", 0, 0));
 
 					//if (this.rnd.Next (0, 3) < 1) {

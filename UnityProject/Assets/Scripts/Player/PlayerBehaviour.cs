@@ -8,7 +8,7 @@ public class PlayerBehaviour : MonoBehaviour
 	private int totalCoins;
 	public Vector2 velocity;
 	public Vector2 gravity;
-
+	private TreadmillBehaviour treadmill;
 
 	public delegate void CoinCollectedHandler (int total_coins);
 
@@ -17,22 +17,31 @@ public class PlayerBehaviour : MonoBehaviour
 	void Start ()
 	{
 		this.totalCoins = 0;
-		
-		this.velocity = new Vector2 (0, 0);
+
+		this.velocity = new Vector2 (0.15f, 0);
 		this.gravity = new Vector2 (0, -0.01f);
 
 		this.fsm = new PlayerFSM (this);
 		this.fsm.start ();
 	}
-	
+
 	void Update ()
 	{
 		this.fsm.Update ();
 	}
 
-	public void KillPlayer()
+	public void SetTreadmill(TreadmillBehaviour treadmill)
 	{
-		Application.LoadLevel("Menu");
+		this.treadmill = treadmill;
+	}
+	public TreadmillBehaviour GetTreadmill()
+	{
+		return this.treadmill;
+	}
+
+	public void KillPlayer ()
+	{
+		Application.LoadLevel ("Menu");
 	}
 	
 	void OnTriggerEnter (Collider other)
@@ -46,6 +55,13 @@ public class PlayerBehaviour : MonoBehaviour
 		}
 		if (other.gameObject.tag == "floorgap") {
 			this.fsm.GoFalling ();
+			float offset = other.gameObject.transform.localPosition.x - this.transform.localPosition.x;
+
+			Debug.Log ("offset:" + offset);
+
+			if (offset < 0) {
+				this.velocity.x = 0.0f;
+			}
 		}
 	}
 
