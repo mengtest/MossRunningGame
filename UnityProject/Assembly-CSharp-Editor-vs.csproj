@@ -46,7 +46,7 @@
   <ItemGroup>
      <Compile Include="Assets\Editor\CreatePlane.cs" />
      <None Include="Assets\Standard Assets\Projectors\Blob-Shadow\ShadowProjection.shader" />
-     <None Include="Assets\Shaders\Solid Color.shader" />
+     <None Include="Assets\Materials\Shaders\Solid Color.shader" />
  <Reference Include="UnityEditor.Graphs">
  <HintPath>C:\Program Files (x86)\Unity\Editor\Data\Managed\UnityEditor.Graphs.dll</HintPath>
  </Reference>
